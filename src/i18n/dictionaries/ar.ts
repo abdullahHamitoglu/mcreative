@@ -60,6 +60,7 @@ export const ar: Dictionary = {
     clientLabel: 'العميل',
     teamLabel: 'فريق العمل على هذا المشروع',
     backToAll: 'كل المشاريع',
+    liveUrlLabel: 'زيارة الموقع',
     lightboxClose: 'إغلاق',
     lightboxPrev: 'الصورة السابقة',
     lightboxNext: 'الصورة التالية',

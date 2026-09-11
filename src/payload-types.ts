@@ -280,6 +280,10 @@ export interface Project {
    */
   client?: string | null;
   /**
+   * رابط الموقع/المنتج المباشر (اختياري)
+   */
+  liveUrl?: string | null;
+  /**
    * مثال: هوية بصرية، تسويق رقمي
    */
   category?: string | null;
@@ -532,6 +536,7 @@ export interface ProjectsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   client?: T;
+  liveUrl?: T;
   category?: T;
   summary?: T;
   description?: T;

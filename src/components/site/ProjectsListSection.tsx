@@ -71,7 +71,7 @@ export function ProjectsListSection({
                       )}
                     </div>
                     <div className="flex flex-1 flex-col gap-2 p-5">
-                      <h3 className="m-0 text-lg font-bold text-white">{p.title}</h3>
+                      <h3 className="m-0 text-lg font-bold text-white text-nowrap whitespace-nowrap overflow-hidden text-ellipsis">{p.title}</h3>
                       <p className="m-0 line-clamp-2 text-sm leading-relaxed text-[#9aa0ab]">{p.summary}</p>
                       {p.client && (
                         <p className="m-0 mt-auto pt-2 text-xs text-[#7d818c]">

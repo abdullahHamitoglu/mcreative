@@ -63,6 +63,7 @@ export interface Dictionary {
     clientLabel: string
     teamLabel: string
     backToAll: string
+    liveUrlLabel: string
     lightboxClose: string
     lightboxPrev: string
     lightboxNext: string

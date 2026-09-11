@@ -53,6 +53,7 @@ export interface ProjectDetail extends ProjectListItem {
   description: string
   galleryUrls: string[]
   team: ProjectTeamMember[]
+  liveUrl?: string
 }
 
 export interface ProcessItem {

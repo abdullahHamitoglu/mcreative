@@ -6,9 +6,10 @@ import config from '@payload-config'
 import { PageShell } from '@/components/site/PageShell'
 import { Reveal } from '@/components/site/Reveal'
 import { ProjectGallery } from '@/components/site/ProjectGallery'
+import { ArrowIcon } from '@/components/site/icons'
 import { R } from '@/components/site/tokens'
 import { getShellData } from '@/lib/site-data'
-import { mediaUrl } from '@/lib/payload-helpers'
+import { mediaUrl, normalizeUrl } from '@/lib/payload-helpers'
 import { isLocale, type Locale } from '@/i18n/locales'
 import { getDictionary } from '@/i18n/dictionary'
 import type { ProjectDetail } from '@/components/site/types'
@@ -51,6 +52,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
     coverImageUrl: mediaUrl(projectDoc.coverImage, 'full'),
     galleryUrls: (projectDoc.gallery ?? []).map((g) => mediaUrl(g.image, 'full')).filter((u): u is string => Boolean(u)),
     team: (projectDoc.team ?? []).map((t) => ({ name: t.name, role: t.role })),
+    liveUrl: normalizeUrl(projectDoc.liveUrl),
   }
 
   const descriptionParagraphs = project.description.split('\n').map((p) => p.trim()).filter(Boolean)
@@ -83,6 +85,18 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
               <p className="mt-2 mb-0 text-sm text-[#7d818c]">
                 {dict.projects.clientLabel}: {project.client}
               </p>
+            )}
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex w-fit items-center gap-2 px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-white/20"
+                style={{ borderRadius: R.pill, background: 'rgba(255,255,255,0.09)', border: '1px solid rgba(255,255,255,0.13)' }}
+              >
+                {dict.projects.liveUrlLabel}
+                <ArrowIcon size={13} />
+              </a>
             )}
           </Reveal>
         </div>

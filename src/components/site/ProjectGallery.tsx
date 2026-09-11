@@ -23,7 +23,7 @@ export function ProjectGallery({
     <>
       <div className="mx-auto flex max-w-6xl flex-col overflow-hidden">
         {images.map((url, i) => (
-          <Reveal key={url} delay={Math.min(i * 0.04, 0.3)} className="overflow-hidden">
+          <Reveal key={`${url}-${i}`} delay={Math.min(i * 0.04, 0.3)} className="overflow-hidden">
             <button type="button" onClick={() => setOpenIndex(i)} className="block w-full cursor-zoom-in">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={url} alt={title} className="h-auto w-full" />

@@ -6,6 +6,12 @@ import type { Locale } from '../i18n/locales'
 
 const LOCALES: Locale[] = ['ar', 'en', 'tr']
 
+const CATEGORY: Record<Locale, string> = {
+  ar: 'تطوير المواقع',
+  en: 'Web Development',
+  tr: 'Web Geliştirme',
+}
+
 interface ManifestImage {
   localPath: string
   alt: string
@@ -14,10 +20,13 @@ interface ManifestImage {
 
 interface ManifestProject {
   slug: string
-  title: Record<string, string>
-  description: Record<string, string>
+  title: string
+  summary: string
+  description: string
+  client: string
+  liveUrl: string
   featured: boolean
-  category: Record<string, string>
+  order: number
   images: ManifestImage[]
 }
 
@@ -25,32 +34,38 @@ async function findOrUploadMedia(
   payload: Awaited<ReturnType<typeof getPayload>>,
   image: ManifestImage,
 ): Promise<{ id: string | number }> {
-  // Dedup by the local source filename (unique per distinct source media doc) rather than alt
-  // text — several projects reuse the same/similar alt text across genuinely different images,
-  // which previously caused unrelated images to collapse into a single uploaded media doc.
+  // Dedup by the local source filename (unique per distinct source media doc — many entries in
+  // this dataset share generic alt text like "Safaraq" across genuinely different screenshots,
+  // which previously caused unrelated images to collapse into a single uploaded media doc).
+  const sourceFilename = path.basename(image.localPath)
   const existing = await payload.find({
     collection: 'media',
-    where: { filename: { equals: path.basename(image.localPath) } },
+    where: { filename: { equals: sourceFilename } },
     limit: 1,
     locale: 'ar',
   })
   if (existing.docs[0]) return existing.docs[0]
+  const alt = image.alt || image.filename
   return payload.create({
     collection: 'media',
     filePath: image.localPath,
     locale: 'ar',
-    data: { alt: image.alt },
+    data: { alt },
   })
 }
 
 async function importProjects() {
   const manifestPath = process.env.MANIFEST_PATH
-  if (!manifestPath) throw new Error('Set MANIFEST_PATH to the moumin_import_manifest.json path')
+  if (!manifestPath) throw new Error('Set MANIFEST_PATH to the hammad_import_manifest.json path')
 
   const manifest: ManifestProject[] = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'))
   const payload = await getPayload({ config })
 
-  payload.logger.info(`Importing ${manifest.length} projects from moumin-designer…`)
+  // Continue ordering after the existing (moumin-designer) projects rather than colliding with them.
+  const existingCount = (await payload.find({ collection: 'projects', limit: 1 })).totalDocs
+  const orderOffset = existingCount
+
+  payload.logger.info(`Importing ${manifest.length} projects from abdullahhammad.com…`)
 
   for (let i = 0; i < manifest.length; i++) {
     const entry = manifest[i]
@@ -75,10 +90,12 @@ async function importProjects() {
 
     const baseData = {
       slug: entry.slug,
+      client: entry.client || undefined,
+      liveUrl: entry.liveUrl || undefined,
       coverImage: String(coverImage.id),
       gallery: galleryImages.map((g) => ({ image: String(g.id) })),
       featured: entry.featured,
-      order: i,
+      order: orderOffset + entry.order,
     }
 
     const doc =
@@ -88,10 +105,10 @@ async function importProjects() {
         locale: 'ar',
         data: {
           ...baseData,
-          title: entry.title.ar,
-          category: entry.category.ar,
-          summary: entry.description.ar,
-          description: entry.description.ar,
+          title: entry.title,
+          category: CATEGORY.ar,
+          summary: entry.summary,
+          description: entry.description,
         },
       }))
 
@@ -103,10 +120,10 @@ async function importProjects() {
         id: doc.id,
         locale,
         data: {
-          title: entry.title[locale],
-          category: entry.category[locale],
-          summary: entry.description[locale],
-          description: entry.description[locale],
+          title: entry.title,
+          category: CATEGORY[locale],
+          summary: entry.summary,
+          description: entry.description,
         },
       })
     }

@@ -60,6 +60,7 @@ export const tr: Dictionary = {
     clientLabel: 'Müşteri',
     teamLabel: 'Bu Projede Çalışan Ekip',
     backToAll: 'Tüm Projeler',
+    liveUrlLabel: 'Canlı Siteyi Ziyaret Et',
     lightboxClose: 'Kapat',
     lightboxPrev: 'Önceki görsel',
     lightboxNext: 'Sonraki görsel',

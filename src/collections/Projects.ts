@@ -22,6 +22,7 @@ export const Projects: CollectionConfig = {
       admin: { description: 'يُستخدم في رابط صفحة المشروع — نفس الرابط بكل اللغات. أحرف لاتينية وشرطات فقط، مثال: hzaya-brand' },
     },
     { name: 'client', type: 'text', admin: { description: 'اسم العميل (اختياري) — نفس القيمة بكل اللغات' } },
+    { name: 'liveUrl', type: 'text', admin: { description: 'رابط الموقع/المنتج المباشر (اختياري)' } },
     { name: 'category', type: 'text', localized: true, admin: { description: 'مثال: هوية بصرية، تسويق رقمي' } },
     { name: 'summary', type: 'textarea', required: true, localized: true, label: 'ملخص قصير', admin: { description: 'يظهر في بطاقة المشروع بقائمة المشاريع' } },
     { name: 'description', type: 'textarea', required: true, localized: true, label: 'الوصف الكامل', admin: { description: 'يظهر في صفحة المشروع التفصيلية' } },
