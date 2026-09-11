@@ -19,6 +19,7 @@ export const Media: CollectionConfig = {
     imageSizes: [
       { name: 'thumbnail', width: 400 },
       { name: 'card', width: 800 },
+      { name: 'full', width: 2000, withoutEnlargement: true },
     ],
     adminThumbnail: ({ doc }): string | false => {
       const docUrl = typeof doc.url === 'string' ? doc.url : ''

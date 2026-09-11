@@ -75,7 +75,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
     client: p.client ?? undefined,
     category: p.category ?? undefined,
     summary: p.summary,
-    coverImageUrl: mediaUrl(p.coverImage),
+    coverImageUrl: mediaUrl(p.coverImage, 'card'),
   }))
 
   return (

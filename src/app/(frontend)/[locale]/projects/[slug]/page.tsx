@@ -5,6 +5,7 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import { PageShell } from '@/components/site/PageShell'
 import { Reveal } from '@/components/site/Reveal'
+import { ProjectGallery } from '@/components/site/ProjectGallery'
 import { R } from '@/components/site/tokens'
 import { getShellData } from '@/lib/site-data'
 import { mediaUrl } from '@/lib/payload-helpers'
@@ -47,12 +48,13 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
     category: projectDoc.category ?? undefined,
     summary: projectDoc.summary,
     description: projectDoc.description,
-    coverImageUrl: mediaUrl(projectDoc.coverImage),
-    galleryUrls: (projectDoc.gallery ?? []).map((g) => mediaUrl(g.image)).filter((u): u is string => Boolean(u)),
+    coverImageUrl: mediaUrl(projectDoc.coverImage, 'full'),
+    galleryUrls: (projectDoc.gallery ?? []).map((g) => mediaUrl(g.image, 'full')).filter((u): u is string => Boolean(u)),
     team: (projectDoc.team ?? []).map((t) => ({ name: t.name, role: t.role })),
   }
 
   const descriptionParagraphs = project.description.split('\n').map((p) => p.trim()).filter(Boolean)
+  const stackedImages = [project.coverImageUrl, ...project.galleryUrls].filter((u): u is string => Boolean(u))
 
   return (
     <PageShell site={site} footerAbout={footerAbout} dict={dict} locale={locale}>
@@ -86,12 +88,9 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
         </div>
       </section>
 
-      {project.coverImageUrl && (
-        <section className="relative z-10 px-5 pb-8 sm:px-8">
-          <Reveal className="mx-auto max-w-[1152px] overflow-hidden" style={{ borderRadius: R.card }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={project.coverImageUrl} alt="" className="max-h-[520px] w-full object-cover" />
-          </Reveal>
+      {stackedImages.length > 0 && (
+        <section className="relative z-10 px-5 pb-10 sm:px-8">
+          <ProjectGallery images={stackedImages} title={project.title} dict={dict.projects} />
         </section>
       )}
 
@@ -132,19 +131,6 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
           )}
         </div>
       </section>
-
-      {project.galleryUrls.length > 0 && (
-        <section className="relative z-10 px-5 pb-10 sm:px-8">
-          <div className="mx-auto grid max-w-[1152px] grid-cols-1 gap-4 sm:grid-cols-2">
-            {project.galleryUrls.map((url, i) => (
-              <Reveal key={url} delay={i * 0.05} style={{ borderRadius: R.card }} className="overflow-hidden">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={url} alt="" className="h-[280px] w-full object-cover" />
-              </Reveal>
-            ))}
-          </div>
-        </section>
-      )}
     </PageShell>
   )
 }

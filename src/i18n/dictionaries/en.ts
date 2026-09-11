@@ -60,6 +60,9 @@ export const en: Dictionary = {
     clientLabel: 'Client',
     teamLabel: 'Team behind this project',
     backToAll: 'All Projects',
+    lightboxClose: 'Close',
+    lightboxPrev: 'Previous image',
+    lightboxNext: 'Next image',
   },
   aboutTeaser: {
     eyebrow: 'About Us',

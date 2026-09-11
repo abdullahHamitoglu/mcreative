@@ -60,6 +60,9 @@ export const tr: Dictionary = {
     clientLabel: 'Müşteri',
     teamLabel: 'Bu Projede Çalışan Ekip',
     backToAll: 'Tüm Projeler',
+    lightboxClose: 'Kapat',
+    lightboxPrev: 'Önceki görsel',
+    lightboxNext: 'Sonraki görsel',
   },
   aboutTeaser: {
     eyebrow: 'Hakkımızda',

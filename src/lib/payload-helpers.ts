@@ -1,7 +1,8 @@
-export function mediaUrl(value: unknown): string | undefined {
+export function mediaUrl(value: unknown, size?: 'thumbnail' | 'card' | 'full'): string | undefined {
   if (!value) return undefined
   if (typeof value === 'string') return undefined
-  const doc = value as { url?: string }
+  const doc = value as { url?: string; sizes?: Record<string, { url?: string } | undefined> }
+  if (size) return doc.sizes?.[size]?.url ?? doc.url ?? undefined
   return doc.url ?? undefined
 }
 

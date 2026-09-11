@@ -63,6 +63,9 @@ export interface Dictionary {
     clientLabel: string
     teamLabel: string
     backToAll: string
+    lightboxClose: string
+    lightboxPrev: string
+    lightboxNext: string
   }
   aboutTeaser: {
     eyebrow: string
