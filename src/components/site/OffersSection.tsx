@@ -4,13 +4,16 @@ import { SectionHeader, ViewAllLink } from './SectionHeader'
 import { CheckCircleIcon } from './icons'
 import { R } from './tokens'
 import type { OfferItem } from './types'
+import type { Dictionary } from '@/i18n/dictionary'
 
 export function OffersSection({
   offers,
+  dict,
   viewAllHref,
   sectionId = 'offers',
 }: {
   offers: OfferItem[]
+  dict: Dictionary['offers']
   viewAllHref?: string
   sectionId?: string
 }) {
@@ -19,11 +22,7 @@ export function OffersSection({
   return (
     <section id={sectionId} className="relative z-10 px-5 py-10 sm:px-8">
       <div className="mx-auto max-w-[1152px]">
-        <SectionHeader
-          eyebrow="عروضنا"
-          title="ثلاثة عروض مفهومة"
-          description="كل عرض له نطاق ومخرجات محددة سلفاً — لا مفاجآت في التسليم أو التسعير."
-        />
+        <SectionHeader eyebrow={dict.eyebrow} title={dict.title} description={dict.description} />
 
         <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
           {offers.map((o, i) => (
@@ -46,7 +45,7 @@ export function OffersSection({
           ))}
         </div>
 
-        {viewAllHref && <ViewAllLink href={viewAllHref} label="كل العروض" />}
+        {viewAllHref && <ViewAllLink href={viewAllHref} label={dict.viewAll} />}
       </div>
     </section>
   )

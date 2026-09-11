@@ -1,0 +1,87 @@
+import type { Dictionary } from '../dictionary'
+
+export const tr: Dictionary = {
+  meta: {
+    siteDescription:
+      'M Creative, Türkiye merkezli yaratıcı ve stratejik bir ajanstır; proje ve pazar anlayışını kimlik, içerik, üretim ve pazarlamayla birleştirir.',
+  },
+  nav: {
+    ctaStartProject: 'Projenizi Başlatın',
+    openMenu: 'Menüyü aç',
+    closeMenu: 'Menüyü kapat',
+    logoHomeLabel: 'Ana Sayfa',
+  },
+  hero: {
+    pillServices: 'Hizmetler',
+    pillAbout: 'Hakkımızda',
+    pillContact: 'İletişim',
+    formTitle: 'Danışmanlık veya Proje Talep Edin',
+    fieldName: 'Ad Soyad',
+    fieldEmail: 'E-posta',
+    fieldService: 'İstenen hizmet',
+    fieldDescription: 'Projeniz hakkında kısa bir özet',
+    submit: 'Talebi Gönder',
+    errorRequired: 'Lütfen ad ve e-posta alanlarını doldurun.',
+    errorEmail: 'Lütfen geçerli bir e-posta adresi girin.',
+    successNote: 'Talebi göndermek için e-posta uygulamanız açılacak.',
+    mailtoSubjectTemplate: '{name} adlı kişiden proje talebi',
+    mailtoNameLabel: 'Ad Soyad',
+    mailtoEmailLabel: 'E-posta',
+    mailtoServiceLabel: 'İstenen hizmet',
+    mailtoDescriptionLabel: 'Proje açıklaması',
+    mailtoDescriptionHeading: 'Proje açıklaması:',
+    emptyValue: '—',
+  },
+  services: {
+    eyebrow: 'Hizmetler',
+    title: 'Projenizi Birlikte Yaratıcı Şekilde Hayata Geçirelim',
+    description: 'Markanızın yolculuğunu stratejiden pazarlamaya kadar kapsayan dört temel hizmet.',
+    viewAll: 'Tüm Hizmetler',
+  },
+  offers: {
+    eyebrow: 'Tekliflerimiz',
+    title: 'Anlaşılır Üç Teklif',
+    description: 'Her teklifin kapsamı ve çıktıları önceden bellidir — teslimatta veya fiyatlandırmada sürpriz yoktur.',
+    viewAll: 'Tüm Teklifler',
+  },
+  markets: {
+    eyebrow: 'Pazarlar',
+    title: "Türkiye'den Başlıyor, İstikrarla Büyüyoruz",
+    description: 'Pazar büyüklüğüne göre değil, bilinçli bir giriş sırasına göre ilerliyoruz — her aşama bir öncekinin kanıtlanması üzerine kurulur.',
+    viewAll: 'Tüm Pazarlar',
+  },
+  projects: {
+    eyebrow: 'Projelerimiz',
+    title: 'Hayata Geçirdiğimiz İşler',
+    description: 'M Creative projelerinden örnekler — her projeyi hayata geçiren ekiple birlikte.',
+    viewAll: 'Tüm Projeler',
+    emptyTitle: 'Henüz yayınlanmış proje yok',
+    emptyDescription: 'İlk projelerimizi belgeliyoruz — yakında burada olacaklar.',
+    clientLabel: 'Müşteri',
+    teamLabel: 'Bu Projede Çalışan Ekip',
+    backToAll: 'Tüm Projeler',
+  },
+  aboutTeaser: {
+    eyebrow: 'Hakkımızda',
+    viewAll: 'Bizi Daha Yakından Tanıyın',
+  },
+  process: {
+    eyebrow: 'Sürecimiz',
+  },
+  founders: {
+    eyebrow: 'Ekibimiz',
+    title: "M Creative'i Kim Yönetiyor",
+  },
+  footer: {
+    aboutHeading: (siteName: string) => `${siteName} Hakkında`,
+    socialInstagram: 'Instagram',
+    socialLinkedin: 'LinkedIn',
+    socialWhatsapp: 'WhatsApp',
+    socialEmail: 'E-posta',
+  },
+  notFound: {
+    projectTitle: 'Proje bulunamadı',
+    projectDescription: 'Bu proje mevcut değil veya kaldırılmış.',
+    backHome: 'Ana sayfaya dön',
+  },
+}

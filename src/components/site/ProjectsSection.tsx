@@ -6,14 +6,20 @@ import { Reveal } from './Reveal'
 import { SectionHeader, ViewAllLink } from './SectionHeader'
 import { R } from './tokens'
 import type { ProjectListItem } from './types'
+import type { Dictionary } from '@/i18n/dictionary'
+import type { Locale } from '@/i18n/locales'
 
 export function ProjectsSection({
   projects,
+  dict,
+  locale,
   viewAllHref,
   sectionId = 'projects',
   showEmptyState = false,
 }: {
   projects: ProjectListItem[]
+  dict: Dictionary['projects']
+  locale: Locale
   viewAllHref?: string
   sectionId?: string
   /** Homepage teaser hides itself when empty; the dedicated /projects page shows a friendly message instead. */
@@ -24,15 +30,15 @@ export function ProjectsSection({
   return (
     <section id={sectionId} className="relative z-10 px-5 py-10 sm:px-8">
       <div className="mx-auto max-w-[1152px]">
-        <SectionHeader eyebrow="مشاريعنا" title="أعمال نفّذناها" description="نماذج من مشاريع M Creative — مع الفريق الذي نفّذ كل مشروع." />
+        <SectionHeader eyebrow={dict.eyebrow} title={dict.title} description={dict.description} />
 
         {!projects.length && (
           <div
             className="mx-auto flex max-w-[520px] flex-col items-center gap-2 p-9 text-center"
             style={{ borderRadius: R.card, background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.11)' }}
           >
-            <p className="m-0 text-base font-bold text-white">لا توجد مشاريع منشورة بعد</p>
-            <p className="m-0 text-sm leading-relaxed text-[#9aa0ab]">نعمل على توثيق مشاريعنا الأولى — تابعونا قريباً.</p>
+            <p className="m-0 text-base font-bold text-white">{dict.emptyTitle}</p>
+            <p className="m-0 text-sm leading-relaxed text-[#9aa0ab]">{dict.emptyDescription}</p>
           </div>
         )}
 
@@ -40,7 +46,7 @@ export function ProjectsSection({
           {projects.map((p, i) => (
             <Reveal key={p.id} delay={i * 0.06}>
               <motion.a
-                href={`/projects/${p.slug}`}
+                href={`/${locale}/projects/${p.slug}`}
                 whileHover={{ y: -5 }}
                 className="flex h-full flex-col overflow-hidden"
                 style={{ borderRadius: R.card, background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.1)' }}
@@ -62,14 +68,18 @@ export function ProjectsSection({
                 <div className="flex flex-1 flex-col gap-2 p-5">
                   <h3 className="m-0 text-lg font-bold text-white">{p.title}</h3>
                   <p className="m-0 line-clamp-2 text-sm leading-relaxed text-[#9aa0ab]">{p.summary}</p>
-                  {p.client && <p className="m-0 mt-auto pt-2 text-xs text-[#7d818c]">العميل: {p.client}</p>}
+                  {p.client && (
+                    <p className="m-0 mt-auto pt-2 text-xs text-[#7d818c]">
+                      {dict.clientLabel}: {p.client}
+                    </p>
+                  )}
                 </div>
               </motion.a>
             </Reveal>
           ))}
         </div>
 
-        {viewAllHref && <ViewAllLink href={viewAllHref} label="كل المشاريع" />}
+        {viewAllHref && <ViewAllLink href={viewAllHref} label={dict.viewAll} />}
       </div>
     </section>
   )

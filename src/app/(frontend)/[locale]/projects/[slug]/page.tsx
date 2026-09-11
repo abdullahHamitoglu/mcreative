@@ -8,26 +8,34 @@ import { Reveal } from '@/components/site/Reveal'
 import { R } from '@/components/site/tokens'
 import { getShellData } from '@/lib/site-data'
 import { mediaUrl } from '@/lib/payload-helpers'
+import { isLocale, type Locale } from '@/i18n/locales'
+import { getDictionary } from '@/i18n/dictionary'
 import type { ProjectDetail } from '@/components/site/types'
 
 export const dynamic = 'force-dynamic'
 
-async function getProject(slug: string) {
+async function getProject(slug: string, locale: Locale) {
   const payload = await getPayload({ config })
-  const res = await payload.find({ collection: 'projects', where: { slug: { equals: slug } }, limit: 1 })
+  const res = await payload.find({ collection: 'projects', where: { slug: { equals: slug } }, limit: 1, locale })
   return res.docs[0] ?? null
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  const { slug } = await params
-  const project = await getProject(slug)
-  if (!project) return { title: 'مشروع غير موجود' }
+export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }): Promise<Metadata> {
+  const { locale: rawLocale, slug } = await params
+  const locale = isLocale(rawLocale) ? rawLocale : 'ar'
+  const dict = getDictionary(locale)
+  const project = await getProject(slug, locale)
+  if (!project) return { title: dict.notFound.projectTitle }
   return { title: project.title, description: project.summary }
 }
 
-export default async function ProjectDetailPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params
-  const [{ site, footerAbout }, projectDoc] = await Promise.all([getShellData(), getProject(slug)])
+export default async function ProjectDetailPage({ params }: { params: Promise<{ locale: string; slug: string }> }) {
+  const { locale: rawLocale, slug } = await params
+  if (!isLocale(rawLocale)) notFound()
+  const locale = rawLocale
+  const dict = getDictionary(locale)
+
+  const [{ site, footerAbout }, projectDoc] = await Promise.all([getShellData(locale), getProject(slug, locale)])
 
   if (!projectDoc) notFound()
 
@@ -47,14 +55,17 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
   const descriptionParagraphs = project.description.split('\n').map((p) => p.trim()).filter(Boolean)
 
   return (
-    <PageShell site={site} footerAbout={footerAbout}>
+    <PageShell site={site} footerAbout={footerAbout} dict={dict} locale={locale}>
       <section id="top" className="relative z-10 px-5 pt-6 pb-8 sm:px-8">
         <div className="mx-auto max-w-[1152px]">
-          <a href="/projects" className="mb-6 inline-flex items-center gap-2 text-sm text-[#7d818c] transition-colors hover:text-white">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+          <a
+            href={`/${locale}/projects`}
+            className="mb-6 inline-flex items-center gap-2 text-sm text-[#7d818c] transition-colors hover:text-white"
+          >
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true" className="ltr:-scale-x-100">
               <path d="M7.5 9L4.5 6L7.5 3" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
-            كل المشاريع
+            {dict.projects.backToAll}
           </a>
           <Reveal>
             {project.category && (
@@ -66,7 +77,11 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
               </span>
             )}
             <h1 className="m-0 text-[clamp(28px,4.4vw,44px)] font-extrabold leading-[1.15] text-white">{project.title}</h1>
-            {project.client && <p className="mt-2 mb-0 text-sm text-[#7d818c]">العميل: {project.client}</p>}
+            {project.client && (
+              <p className="mt-2 mb-0 text-sm text-[#7d818c]">
+                {dict.projects.clientLabel}: {project.client}
+              </p>
+            )}
           </Reveal>
         </div>
       </section>
@@ -103,7 +118,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                 className="flex h-full flex-col gap-4 p-7"
                 style={{ borderRadius: R.card, background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.11)' }}
               >
-                <p className="m-0 text-sm font-bold text-[#518de5]">فريق العمل على هذا المشروع</p>
+                <p className="m-0 text-sm font-bold text-[#518de5]">{dict.projects.teamLabel}</p>
                 <div className="flex flex-col gap-3">
                   {project.team.map((member, i) => (
                     <div key={i} className="flex items-center justify-between gap-3 border-b pb-3 last:border-0 last:pb-0" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>

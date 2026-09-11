@@ -1,24 +1,32 @@
 import React from 'react'
+import { notFound } from 'next/navigation'
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import { HomePage } from '@/components/site/HomePage'
 import { getShellData } from '@/lib/site-data'
 import { mediaUrl, rowId } from '@/lib/payload-helpers'
+import { isLocale } from '@/i18n/locales'
+import { getDictionary } from '@/i18n/dictionary'
 import type { HomepageData, ServiceItem, OfferItem, MarketItem, ProjectListItem } from '@/components/site/types'
 
 export const dynamic = 'force-dynamic'
 
-export default async function Page() {
+export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale: rawLocale } = await params
+  if (!isLocale(rawLocale)) notFound()
+  const locale = rawLocale
+  const dict = getDictionary(locale)
+
   const payload = await getPayload({ config })
 
   const [{ site, footerAbout }, homepage, servicesRes, offersRes, marketsRes, projectsRes, aboutPage] = await Promise.all([
-    getShellData(),
-    payload.findGlobal({ slug: 'homepage' }),
-    payload.find({ collection: 'services', sort: 'order', limit: 4 }),
-    payload.find({ collection: 'offers', sort: 'order', limit: 3 }),
-    payload.find({ collection: 'markets', sort: 'order', limit: 4 }),
-    payload.find({ collection: 'projects', where: { featured: { equals: true } }, sort: 'order', limit: 3 }),
-    payload.findGlobal({ slug: 'about-page' }),
+    getShellData(locale),
+    payload.findGlobal({ slug: 'homepage', locale }),
+    payload.find({ collection: 'services', sort: 'order', limit: 4, locale }),
+    payload.find({ collection: 'offers', sort: 'order', limit: 3, locale }),
+    payload.find({ collection: 'markets', sort: 'order', limit: 4, locale }),
+    payload.find({ collection: 'projects', where: { featured: { equals: true } }, sort: 'order', limit: 3, locale }),
+    payload.findGlobal({ slug: 'about-page', locale }),
   ])
 
   const home: HomepageData = {
@@ -79,6 +87,8 @@ export default async function Page() {
       markets={markets}
       projects={projects}
       aboutStory={aboutPage.story || ''}
+      dict={dict}
+      locale={locale}
     />
   )
 }

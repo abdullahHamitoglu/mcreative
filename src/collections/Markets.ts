@@ -13,9 +13,9 @@ export const Markets: CollectionConfig = {
   },
   defaultSort: 'order',
   fields: [
-    { name: 'stage', type: 'text', required: true, admin: { description: 'مثال: البداية' } },
-    { name: 'title', type: 'text', required: true },
-    { name: 'description', type: 'textarea', required: true },
+    { name: 'stage', type: 'text', required: true, localized: true, admin: { description: 'مثال: البداية' } },
+    { name: 'title', type: 'text', required: true, localized: true },
+    { name: 'description', type: 'textarea', required: true, localized: true },
     {
       name: 'order',
       type: 'number',

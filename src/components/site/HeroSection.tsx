@@ -5,6 +5,8 @@ import { ArrowIcon, BriefcaseIcon, MessageIcon, UserIcon } from './icons'
 import { R } from './tokens'
 import { Reveal } from './Reveal'
 import type { HomepageData } from './types'
+import type { Dictionary } from '@/i18n/dictionary'
+import type { Locale } from '@/i18n/locales'
 
 interface FormState {
   name: string
@@ -16,7 +18,17 @@ interface FormState {
 const EMPTY_FORM: FormState = { name: '', email: '', service: '', description: '' }
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-export function HeroSection({ hero, contactEmail }: { hero: HomepageData['hero']; contactEmail?: string }) {
+export function HeroSection({
+  hero,
+  contactEmail,
+  dict,
+  locale,
+}: {
+  hero: HomepageData['hero']
+  contactEmail?: string
+  dict: Dictionary['hero']
+  locale: Locale
+}) {
   const [form, setForm] = useState<FormState>(EMPTY_FORM)
   const [note, setNote] = useState('')
 
@@ -30,38 +42,38 @@ export function HeroSection({ hero, contactEmail }: { hero: HomepageData['hero']
     const email = form.email.trim()
 
     if (!name || !email) {
-      setNote('الرجاء تعبئة الاسم والبريد الإلكتروني.')
+      setNote(dict.errorRequired)
       return
     }
     if (!EMAIL_PATTERN.test(email)) {
-      setNote('الرجاء إدخال بريد إلكتروني صحيح.')
+      setNote(dict.errorEmail)
       return
     }
 
-    const subject = encodeURIComponent(`طلب مشروع من ${name}`)
+    const subject = encodeURIComponent(dict.mailtoSubjectTemplate.replace('{name}', name))
     const bodyLines = [
-      `الاسم: ${name}`,
-      `البريد الإلكتروني: ${email}`,
-      `الخدمة المطلوبة: ${form.service.trim() || '—'}`,
+      `${dict.mailtoNameLabel}: ${name}`,
+      `${dict.mailtoEmailLabel}: ${email}`,
+      `${dict.mailtoServiceLabel}: ${form.service.trim() || dict.emptyValue}`,
       '',
-      'وصف المشروع:',
-      form.description.trim() || '—',
+      dict.mailtoDescriptionHeading,
+      form.description.trim() || dict.emptyValue,
     ]
     const body = encodeURIComponent(bodyLines.join('\n'))
     window.location.href = `mailto:${contactEmail || 'hello@mcreative.example'}?subject=${subject}&body=${body}`
-    setNote('سيفتح برنامج البريد لديك لإرسال الطلب.')
+    setNote(dict.successNote)
   }
 
   const pills = [
-    { label: 'الخدمات', href: '/services', icon: <BriefcaseIcon /> },
-    { label: 'من نحن', href: '/about', icon: <UserIcon /> },
-    { label: 'تواصل معنا', href: '#start-project', icon: <MessageIcon /> },
+    { label: dict.pillServices, href: `/${locale}/services`, icon: <BriefcaseIcon /> },
+    { label: dict.pillAbout, href: `/${locale}/about`, icon: <UserIcon /> },
+    { label: dict.pillContact, href: '#start-project', icon: <MessageIcon /> },
   ]
 
   const fields: { key: keyof FormState; placeholder: string; type: string }[] = [
-    { key: 'name', placeholder: 'الاسم', type: 'text' },
-    { key: 'email', placeholder: 'البريد الإلكتروني', type: 'email' },
-    { key: 'service', placeholder: 'الخدمة المطلوبة', type: 'text' },
+    { key: 'name', placeholder: dict.fieldName, type: 'text' },
+    { key: 'email', placeholder: dict.fieldEmail, type: 'email' },
+    { key: 'service', placeholder: dict.fieldService, type: 'text' },
   ]
 
   return (
@@ -117,7 +129,7 @@ export function HeroSection({ hero, contactEmail }: { hero: HomepageData['hero']
               boxShadow: '0 8px 40px rgba(0,0,0,0.45)',
             }}
           >
-            <p className="m-0 text-[17px] font-bold text-white">اطلب استشارة أو مشروعاً</p>
+            <p className="m-0 text-[17px] font-bold text-white">{dict.formTitle}</p>
 
             {fields.map((f) => (
               <div key={f.key} className="group relative">
@@ -144,7 +156,7 @@ export function HeroSection({ hero, contactEmail }: { hero: HomepageData['hero']
 
             <div className="group relative">
               <label htmlFor="field-description" className="sr-only">
-                نبذة مختصرة عن مشروعك
+                {dict.fieldDescription}
               </label>
               <div
                 aria-hidden
@@ -155,7 +167,7 @@ export function HeroSection({ hero, contactEmail }: { hero: HomepageData['hero']
                 id="field-description"
                 value={form.description}
                 onChange={onField('description')}
-                placeholder="نبذة مختصرة عن مشروعك"
+                placeholder={dict.fieldDescription}
                 rows={3}
                 className="relative w-full resize-none bg-white/5 px-[21px] py-3.5 text-sm text-white outline-none placeholder:text-white/25"
                 style={{ borderRadius: R.inner }}
@@ -167,7 +179,7 @@ export function HeroSection({ hero, contactEmail }: { hero: HomepageData['hero']
               className="relative flex h-[50px] w-full items-center justify-center gap-2 overflow-hidden font-bold text-[#05131f] transition-transform hover:-translate-y-0.5"
               style={{ borderRadius: R.pill, background: 'linear-gradient(135deg,#0d52bf 0%,#518de5 55%,#c3d830 100%)' }}
             >
-              <span>أرسل الطلب</span>
+              <span>{dict.submit}</span>
               <ArrowIcon color="#05131f" />
             </button>
             <p role="status" aria-live="polite" className="m-0 min-h-[14px] text-center text-[11px] text-[#9aa0ab]">

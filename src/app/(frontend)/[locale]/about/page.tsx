@@ -1,5 +1,6 @@
 import React from 'react'
 import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import { PageShell } from '@/components/site/PageShell'
@@ -9,29 +10,37 @@ import { Reveal } from '@/components/site/Reveal'
 import { R } from '@/components/site/tokens'
 import { getShellData } from '@/lib/site-data'
 import { mediaUrl, rowId } from '@/lib/payload-helpers'
+import { isLocale } from '@/i18n/locales'
+import { getDictionary } from '@/i18n/dictionary'
 import type { AboutPageData } from '@/components/site/types'
 
 export const dynamic = 'force-dynamic'
 
-export const metadata: Metadata = {
-  title: 'من نحن',
-  description: 'M Creative — قصتنا، منهج عملنا، ومن يقود الوكالة.',
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
+  const dict = getDictionary(isLocale(locale) ? locale : 'ar')
+  return { title: dict.aboutTeaser.eyebrow, description: dict.meta.siteDescription }
 }
 
-export default async function AboutPage() {
+export default async function AboutPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale: rawLocale } = await params
+  if (!isLocale(rawLocale)) notFound()
+  const locale = rawLocale
+  const dict = getDictionary(locale)
+
   const payload = await getPayload({ config })
   const [{ site, footerAbout }, aboutPage] = await Promise.all([
-    getShellData(),
-    payload.findGlobal({ slug: 'about-page' }),
+    getShellData(locale),
+    payload.findGlobal({ slug: 'about-page', locale }),
   ])
 
   const data: AboutPageData = {
-    heroTitle: aboutPage.heroTitle || 'من نحن',
+    heroTitle: aboutPage.heroTitle || dict.aboutTeaser.eyebrow,
     heroSubtitle: aboutPage.heroSubtitle || '',
     heroImageUrl: mediaUrl(aboutPage.heroImage),
     story: aboutPage.story || '',
     processIntro: {
-      title: aboutPage.processIntro?.title || 'الاحتراف شيء تراه، لا مجرد وعد',
+      title: aboutPage.processIntro?.title || '',
       description: aboutPage.processIntro?.description || '',
     },
     process: (aboutPage.process ?? []).map((p, i) => ({
@@ -52,7 +61,7 @@ export default async function AboutPage() {
   const storyParagraphs = data.story.split('\n').map((p) => p.trim()).filter(Boolean)
 
   return (
-    <PageShell site={site} footerAbout={footerAbout}>
+    <PageShell site={site} footerAbout={footerAbout} dict={dict} locale={locale}>
       <section id="top" className="relative z-10 px-5 pt-6 pb-10 sm:px-8">
         <div className="mx-auto flex max-w-[1152px] flex-col items-center gap-6 lg:flex-row lg:items-stretch">
           {data.heroImageUrl && (
@@ -62,7 +71,7 @@ export default async function AboutPage() {
             </Reveal>
           )}
           <Reveal className="flex flex-1 flex-col items-center justify-center gap-3 text-center lg:items-start lg:text-start" delay={0.05}>
-            <span className="text-[15px] font-bold text-[#518de5]">من نحن</span>
+            <span className="text-[15px] font-bold text-[#518de5]">{dict.aboutTeaser.eyebrow}</span>
             <h1 className="m-0 text-[clamp(30px,4.6vw,46px)] font-extrabold leading-[1.15] text-white">{data.heroTitle}</h1>
             {data.heroSubtitle && <p className="m-0 max-w-[52ch] text-[17px] leading-relaxed text-[#9aa0ab]">{data.heroSubtitle}</p>}
           </Reveal>
@@ -86,8 +95,8 @@ export default async function AboutPage() {
         </section>
       )}
 
-      <ProcessSection intro={data.processIntro} process={data.process} />
-      <FoundersSection founders={data.founders} />
+      <ProcessSection intro={data.processIntro} process={data.process} dict={dict.process} />
+      <FoundersSection founders={data.founders} dict={dict.founders} />
     </PageShell>
   )
 }

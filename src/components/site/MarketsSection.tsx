@@ -3,13 +3,16 @@ import { Reveal } from './Reveal'
 import { SectionHeader, ViewAllLink } from './SectionHeader'
 import { R } from './tokens'
 import type { MarketItem } from './types'
+import type { Dictionary } from '@/i18n/dictionary'
 
 export function MarketsSection({
   markets,
+  dict,
   viewAllHref,
   sectionId = 'markets',
 }: {
   markets: MarketItem[]
+  dict: Dictionary['markets']
   viewAllHref?: string
   sectionId?: string
 }) {
@@ -18,11 +21,7 @@ export function MarketsSection({
   return (
     <section id={sectionId} className="relative z-10 px-5 py-10 sm:px-8">
       <div className="mx-auto max-w-[1152px]">
-        <SectionHeader
-          eyebrow="الأسواق"
-          title="نبدأ من تركيا، ونوسّع بثبات"
-          description="ترتيب دخول مدروس، لا ترتيب لحجم الأسواق — كل مرحلة تُبنى على إثبات المرحلة التي قبلها."
-        />
+        <SectionHeader eyebrow={dict.eyebrow} title={dict.title} description={dict.description} />
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
           {markets.map((m, i) => (
@@ -44,7 +43,7 @@ export function MarketsSection({
           ))}
         </div>
 
-        {viewAllHref && <ViewAllLink href={viewAllHref} label="كل الأسواق" />}
+        {viewAllHref && <ViewAllLink href={viewAllHref} label={dict.viewAll} />}
       </div>
     </section>
   )

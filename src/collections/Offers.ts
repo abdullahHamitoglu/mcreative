@@ -13,10 +13,10 @@ export const Offers: CollectionConfig = {
   },
   defaultSort: 'order',
   fields: [
-    { name: 'index', type: 'text', required: true, admin: { description: 'مثال: 01' } },
-    { name: 'title', type: 'text', required: true },
-    { name: 'whatBuys', type: 'textarea', required: true, label: 'ماذا يشتري العميل؟' },
-    { name: 'scopeNote', type: 'text', required: true, label: 'حدود النطاق' },
+    { name: 'index', type: 'text', required: true, admin: { description: 'مثال: 01 — نفس القيمة بكل اللغات' } },
+    { name: 'title', type: 'text', required: true, localized: true },
+    { name: 'whatBuys', type: 'textarea', required: true, localized: true, label: 'ماذا يشتري العميل؟' },
+    { name: 'scopeNote', type: 'text', required: true, localized: true, label: 'حدود النطاق' },
     {
       name: 'order',
       type: 'number',

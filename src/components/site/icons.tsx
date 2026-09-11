@@ -1,9 +1,21 @@
 /** Small inline icon set — kept local instead of an icon library for the handful of one-off glyphs the design needs. */
 import React from 'react'
 
-export function ArrowIcon({ size = 15, color = 'currentColor' }: { size?: number; color?: string }) {
+/**
+ * Drawn pointing left ("forward" in RTL). `ltr:-scale-x-100` mirrors it automatically for LTR
+ * locales via Tailwind's dir-based variant (reads the nearest ancestor's `dir` attribute) — no
+ * need to thread a locale/rtl prop through every caller.
+ */
+export function ArrowIcon({ size = 15, color = 'currentColor', className = '' }: { size?: number; color?: string; className?: string }) {
   return (
-    <svg width={size} height={size * 0.78} viewBox="0 0 18 14" fill="none" aria-hidden="true">
+    <svg
+      width={size}
+      height={size * 0.78}
+      viewBox="0 0 18 14"
+      fill="none"
+      aria-hidden="true"
+      className={`ltr:-scale-x-100 ${className}`}
+    >
       <path d="M16.5 7H1.5" stroke={color} strokeWidth="2.2" strokeLinecap="round" />
       <path d="M6.5 1.5L1.5 7L6.5 12.5" stroke={color} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>

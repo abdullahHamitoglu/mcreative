@@ -40,6 +40,15 @@ export default buildConfig({
   },
   collections: [Users, Media, Services, Offers, Markets, Projects],
   globals: [SiteSettings, Homepage, AboutPage],
+  localization: {
+    locales: [
+      { label: 'العربية', code: 'ar', rtl: true },
+      { label: 'English', code: 'en' },
+      { label: 'Türkçe', code: 'tr' },
+    ],
+    defaultLocale: 'ar',
+    fallback: true,
+  },
   editor: lexicalEditor(),
   secret: env.PAYLOAD_SECRET || '',
   email: nodemailerAdapter({

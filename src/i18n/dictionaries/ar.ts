@@ -1,0 +1,87 @@
+import type { Dictionary } from '../dictionary'
+
+export const ar: Dictionary = {
+  meta: {
+    siteDescription:
+      'M Creative وكالة إبداعية واستراتيجية مقرها تركيا، تربط فهم المشروع والسوق بالهوية والمحتوى والإنتاج والتسويق.',
+  },
+  nav: {
+    ctaStartProject: 'ابدأ مشروعك',
+    openMenu: 'فتح القائمة',
+    closeMenu: 'إغلاق القائمة',
+    logoHomeLabel: 'الصفحة الرئيسية',
+  },
+  hero: {
+    pillServices: 'الخدمات',
+    pillAbout: 'من نحن',
+    pillContact: 'تواصل معنا',
+    formTitle: 'اطلب استشارة أو مشروعاً',
+    fieldName: 'الاسم',
+    fieldEmail: 'البريد الإلكتروني',
+    fieldService: 'الخدمة المطلوبة',
+    fieldDescription: 'نبذة مختصرة عن مشروعك',
+    submit: 'أرسل الطلب',
+    errorRequired: 'الرجاء تعبئة الاسم والبريد الإلكتروني.',
+    errorEmail: 'الرجاء إدخال بريد إلكتروني صحيح.',
+    successNote: 'سيفتح برنامج البريد لديك لإرسال الطلب.',
+    mailtoSubjectTemplate: 'طلب مشروع من {name}',
+    mailtoNameLabel: 'الاسم',
+    mailtoEmailLabel: 'البريد الإلكتروني',
+    mailtoServiceLabel: 'الخدمة المطلوبة',
+    mailtoDescriptionLabel: 'وصف المشروع',
+    mailtoDescriptionHeading: 'وصف المشروع:',
+    emptyValue: '—',
+  },
+  services: {
+    eyebrow: 'الخدمات',
+    title: 'لنصنع مشروعك بإبداع',
+    description: 'أربع خدمات أساسية تغطي رحلة العلامة من الاستراتيجية حتى التسويق.',
+    viewAll: 'كل الخدمات',
+  },
+  offers: {
+    eyebrow: 'عروضنا',
+    title: 'ثلاثة عروض مفهومة',
+    description: 'كل عرض له نطاق ومخرجات محددة سلفاً — لا مفاجآت في التسليم أو التسعير.',
+    viewAll: 'كل العروض',
+  },
+  markets: {
+    eyebrow: 'الأسواق',
+    title: 'نبدأ من تركيا، ونوسّع بثبات',
+    description: 'ترتيب دخول مدروس، لا ترتيب لحجم الأسواق — كل مرحلة تُبنى على إثبات المرحلة التي قبلها.',
+    viewAll: 'كل الأسواق',
+  },
+  projects: {
+    eyebrow: 'مشاريعنا',
+    title: 'أعمال نفّذناها',
+    description: 'نماذج من مشاريع M Creative — مع الفريق الذي نفّذ كل مشروع.',
+    viewAll: 'كل المشاريع',
+    emptyTitle: 'لا توجد مشاريع منشورة بعد',
+    emptyDescription: 'نعمل على توثيق مشاريعنا الأولى — تابعونا قريباً.',
+    clientLabel: 'العميل',
+    teamLabel: 'فريق العمل على هذا المشروع',
+    backToAll: 'كل المشاريع',
+  },
+  aboutTeaser: {
+    eyebrow: 'من نحن',
+    viewAll: 'تعرف علينا أكثر',
+  },
+  process: {
+    eyebrow: 'منهجنا',
+  },
+  founders: {
+    eyebrow: 'فريقنا',
+    title: 'من يقود M Creative',
+  },
+  footer: {
+    aboutHeading: (siteName: string) => `عن ${siteName}`,
+    socialInstagram: 'إنستغرام',
+    socialLinkedin: 'لينكدإن',
+    socialWhatsapp: 'واتساب',
+    socialEmail: 'البريد الإلكتروني',
+  },
+  notFound: {
+    projectTitle: 'مشروع غير موجود',
+    projectDescription: 'هذا المشروع غير متاح أو تم حذفه.',
+    backHome: 'العودة للرئيسية',
+  },
+}

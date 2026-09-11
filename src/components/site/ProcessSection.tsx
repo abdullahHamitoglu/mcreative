@@ -3,20 +3,23 @@ import { Reveal } from './Reveal'
 import { SectionHeader } from './SectionHeader'
 import { R } from './tokens'
 import type { AboutPageData } from './types'
+import type { Dictionary } from '@/i18n/dictionary'
 
 export function ProcessSection({
   intro,
   process,
+  dict,
 }: {
   intro: AboutPageData['processIntro']
   process: AboutPageData['process']
+  dict: Dictionary['process']
 }) {
   if (!process.length) return null
 
   return (
     <section id="process" className="relative z-10 px-5 py-10 sm:px-8">
       <div className="mx-auto max-w-[1152px]">
-        <SectionHeader eyebrow="منهجنا" title={intro.title} description={intro.description} />
+        <SectionHeader eyebrow={dict.eyebrow} title={intro.title} description={intro.description} />
 
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
           {process.map((p, i) => (

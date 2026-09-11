@@ -52,13 +52,14 @@ export const SiteSettings: GlobalConfig = {
       label: 'روابط القائمة',
       labels: { singular: 'رابط', plural: 'روابط' },
       fields: [
-        { name: 'label', type: 'text', required: true },
-        { name: 'href', type: 'text', required: true, admin: { description: 'مثال: #services' } },
+        { name: 'label', type: 'text', required: true, localized: true },
+        { name: 'href', type: 'text', required: true, admin: { description: 'مثال: /services — بدون بادئة اللغة، تُضاف تلقائياً' } },
       ],
     },
     {
       name: 'footerNote',
       type: 'text',
+      localized: true,
       admin: { description: 'نص حقوق النشر — سيتم إلحاق السنة تلقائياً' },
       defaultValue: 'M Creative. جميع الحقوق محفوظة.',
     },

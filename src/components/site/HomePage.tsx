@@ -8,6 +8,8 @@ import { MarketsSection } from './MarketsSection'
 import { ProjectsSection } from './ProjectsSection'
 import { AboutTeaser } from './AboutTeaser'
 import type { HomepageData, SiteSettingsData, ServiceItem, OfferItem, MarketItem, ProjectListItem } from './types'
+import type { Dictionary } from '@/i18n/dictionary'
+import type { Locale } from '@/i18n/locales'
 
 export function HomePage({
   home,
@@ -17,6 +19,8 @@ export function HomePage({
   markets,
   projects,
   aboutStory,
+  dict,
+  locale,
 }: {
   home: HomepageData
   site: SiteSettingsData
@@ -25,16 +29,18 @@ export function HomePage({
   markets: MarketItem[]
   projects: ProjectListItem[]
   aboutStory: string
+  dict: Dictionary
+  locale: Locale
 }) {
   return (
-    <PageShell site={site} footerAbout={home.footerAbout}>
-      <HeroSection hero={home.hero} contactEmail={site.contact.email} />
+    <PageShell site={site} footerAbout={home.footerAbout} dict={dict} locale={locale}>
+      <HeroSection hero={home.hero} contactEmail={site.contact.email} dict={dict.hero} locale={locale} />
       <StatementSection statement={home.statement} />
-      <ServicesSection services={services} viewAllHref="/services" />
-      <OffersSection offers={offers} viewAllHref="/offers" />
-      <ProjectsSection projects={projects} viewAllHref="/projects" />
-      <MarketsSection markets={markets} viewAllHref="/markets" />
-      <AboutTeaser story={aboutStory} />
+      <ServicesSection services={services} dict={dict.services} viewAllHref={`/${locale}/services`} />
+      <OffersSection offers={offers} dict={dict.offers} viewAllHref={`/${locale}/offers`} />
+      <ProjectsSection projects={projects} dict={dict.projects} locale={locale} viewAllHref={`/${locale}/projects`} />
+      <MarketsSection markets={markets} dict={dict.markets} viewAllHref={`/${locale}/markets`} />
+      <AboutTeaser story={aboutStory} dict={dict.aboutTeaser} aboutHref={`/${locale}/about`} />
     </PageShell>
   )
 }

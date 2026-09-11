@@ -1,5 +1,6 @@
 import React from 'react'
 import { Reveal } from './Reveal'
+import { ArrowIcon } from './icons'
 
 export function SectionHeader({
   eyebrow,
@@ -27,10 +28,7 @@ export function ViewAllLink({ href, label }: { href: string; label: string }) {
       style={{ borderRadius: 999, background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.1)' }}
     >
       {label}
-      <svg width="14" height="11" viewBox="0 0 18 14" fill="none" aria-hidden="true">
-        <path d="M16.5 7H1.5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
-        <path d="M6.5 1.5L1.5 7L6.5 12.5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
+      <ArrowIcon size={14} />
     </a>
   )
 }

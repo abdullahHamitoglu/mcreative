@@ -3,23 +3,25 @@ import Link from 'next/link'
 import { Reveal } from './Reveal'
 import { R, FONT_EN } from './tokens'
 import type { SiteSettingsData } from './types'
-
-const SOCIAL_LABELS: { key: keyof SiteSettingsData['socials']; label: string; abbr: string }[] = [
-  { key: 'instagram', label: 'إنستغرام', abbr: 'IG' },
-  { key: 'linkedin', label: 'لينكدإن', abbr: 'IN' },
-]
+import type { Dictionary } from '@/i18n/dictionary'
 
 export function Footer({
   siteName,
   footerAbout,
   siteSettings,
+  dict,
 }: {
   siteName: string
   footerAbout: string
   siteSettings: SiteSettingsData
+  dict: Dictionary['footer']
 }) {
   const year = new Date().getFullYear()
-  const socials = SOCIAL_LABELS.map((s) => ({ ...s, href: siteSettings.socials[s.key] })).filter((s) => s.href)
+  const socialLabels: { key: keyof SiteSettingsData['socials']; label: string; abbr: string }[] = [
+    { key: 'instagram', label: dict.socialInstagram, abbr: 'IG' },
+    { key: 'linkedin', label: dict.socialLinkedin, abbr: 'IN' },
+  ]
+  const socials = socialLabels.map((s) => ({ ...s, href: siteSettings.socials[s.key] })).filter((s) => s.href)
   const whatsappDigits = siteSettings.contact.whatsapp?.replace(/[^0-9]/g, '')
   const hasContactIcons = socials.length > 0 || Boolean(siteSettings.contact.email) || Boolean(whatsappDigits)
 
@@ -43,7 +45,7 @@ export function Footer({
               </span>
             </span>
             <div className="max-w-lg text-center">
-              <p className="m-0 mb-2 text-sm font-bold text-white">عن {siteName}</p>
+              <p className="m-0 mb-2 text-sm font-bold text-white">{dict.aboutHeading(siteName)}</p>
               <p className="m-0 text-[13px] leading-[1.7] text-[#9aa0ab]">{footerAbout}</p>
             </div>
             {hasContactIcons && (
@@ -66,7 +68,7 @@ export function Footer({
                     href={`https://wa.me/${whatsappDigits}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="واتساب"
+                    aria-label={dict.socialWhatsapp}
                     className="flex size-10 items-center justify-center rounded-full text-white transition-colors hover:bg-white/20"
                     style={{ background: 'rgba(255,255,255,0.09)', border: '1px solid rgba(255,255,255,0.1)' }}
                   >
@@ -76,7 +78,7 @@ export function Footer({
                 {siteSettings.contact.email && (
                   <a
                     href={`mailto:${siteSettings.contact.email}`}
-                    aria-label="البريد الإلكتروني"
+                    aria-label={dict.socialEmail}
                     className="flex size-10 items-center justify-center rounded-full text-white transition-colors hover:bg-white/20"
                     style={{ background: 'rgba(255,255,255,0.09)', border: '1px solid rgba(255,255,255,0.1)' }}
                   >

@@ -7,13 +7,16 @@ import { SectionHeader, ViewAllLink } from './SectionHeader'
 import { SERVICE_ICONS } from './icons'
 import { R } from './tokens'
 import type { ServiceItem } from './types'
+import type { Dictionary } from '@/i18n/dictionary'
 
 export function ServicesSection({
   services,
+  dict,
   viewAllHref,
   sectionId = 'services',
 }: {
   services: ServiceItem[]
+  dict: Dictionary['services']
   viewAllHref?: string
   sectionId?: string
 }) {
@@ -29,7 +32,7 @@ export function ServicesSection({
         style={{ backgroundImage: 'url(/assets/brand/services-banner.svg)' }}
       />
       <div className="relative mx-auto max-w-[1152px]">
-        <SectionHeader eyebrow="الخدمات" title="لنصنع مشروعك بإبداع" description="أربع خدمات أساسية تغطي رحلة العلامة من الاستراتيجية حتى التسويق." />
+        <SectionHeader eyebrow={dict.eyebrow} title={dict.title} description={dict.description} />
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {services.map((s, i) => {
@@ -54,7 +57,7 @@ export function ServicesSection({
           })}
         </div>
 
-        {viewAllHref && <ViewAllLink href={viewAllHref} label="كل الخدمات" />}
+        {viewAllHref && <ViewAllLink href={viewAllHref} label={dict.viewAll} />}
       </div>
     </section>
   )

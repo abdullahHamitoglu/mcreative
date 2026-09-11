@@ -3,14 +3,15 @@ import { Reveal } from './Reveal'
 import { SectionHeader } from './SectionHeader'
 import { R } from './tokens'
 import type { FounderItem } from './types'
+import type { Dictionary } from '@/i18n/dictionary'
 
-export function FoundersSection({ founders }: { founders: FounderItem[] }) {
+export function FoundersSection({ founders, dict }: { founders: FounderItem[]; dict: Dictionary['founders'] }) {
   if (!founders.length) return null
 
   return (
     <section id="founders" className="relative z-10 px-5 py-10 sm:px-8">
       <div className="mx-auto max-w-[1152px]">
-        <SectionHeader eyebrow="فريقنا" title="من يقود M Creative" />
+        <SectionHeader eyebrow={dict.eyebrow} title={dict.title} />
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
           {founders.map((f, i) => (

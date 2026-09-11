@@ -1,15 +1,16 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import { normalizeUrl, rowId } from './payload-helpers'
+import type { Locale } from '@/i18n/locales'
 import type { SiteSettingsData } from '@/components/site/types'
 
 /** Site settings + footer copy — every page needs both to render the shared Navbar/Footer shell. */
-export async function getShellData(): Promise<{ site: SiteSettingsData; footerAbout: string }> {
+export async function getShellData(locale: Locale): Promise<{ site: SiteSettingsData; footerAbout: string }> {
   const payload = await getPayload({ config })
 
   const [siteSettings, homepage] = await Promise.all([
-    payload.findGlobal({ slug: 'site-settings' }),
-    payload.findGlobal({ slug: 'homepage' }),
+    payload.findGlobal({ slug: 'site-settings', locale }),
+    payload.findGlobal({ slug: 'homepage', locale }),
   ])
 
   const site: SiteSettingsData = {
@@ -22,7 +23,11 @@ export async function getShellData(): Promise<{ site: SiteSettingsData; footerAb
       instagram: normalizeUrl(siteSettings.socials?.instagram),
       linkedin: normalizeUrl(siteSettings.socials?.linkedin),
     },
-    nav: (siteSettings.nav ?? []).map((n, i) => ({ id: rowId(n.id, 'nav', i), label: n.label, href: n.href })),
+    nav: (siteSettings.nav ?? []).map((n, i) => ({
+      id: rowId(n.id, 'nav', i),
+      label: n.label,
+      href: `/${locale}${n.href}`,
+    })),
     footerNote: siteSettings.footerNote || 'M Creative. جميع الحقوق محفوظة.',
   }
 

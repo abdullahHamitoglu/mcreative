@@ -13,8 +13,8 @@ export const Services: CollectionConfig = {
   },
   defaultSort: 'order',
   fields: [
-    { name: 'title', type: 'text', required: true },
-    { name: 'description', type: 'textarea', required: true },
+    { name: 'title', type: 'text', required: true, localized: true },
+    { name: 'description', type: 'textarea', required: true, localized: true },
     {
       name: 'icon',
       type: 'select',

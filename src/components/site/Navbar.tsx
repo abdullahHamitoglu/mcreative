@@ -5,9 +5,22 @@ import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FONT_EN, R } from './tokens'
 import { CloseIcon, MenuIcon } from './icons'
+import { LocaleSwitcher } from './LocaleSwitcher'
 import type { NavLink } from './types'
+import type { Dictionary } from '@/i18n/dictionary'
+import type { Locale } from '@/i18n/locales'
 
-export function Navbar({ siteName, nav }: { siteName: string; nav: NavLink[] }) {
+export function Navbar({
+  siteName,
+  nav,
+  dict,
+  locale,
+}: {
+  siteName: string
+  nav: NavLink[]
+  dict: Dictionary['nav']
+  locale: Locale
+}) {
   const [open, setOpen] = useState(false)
   const panelRef = useRef<HTMLDivElement>(null)
   const openBtnRef = useRef<HTMLButtonElement>(null)
@@ -52,7 +65,7 @@ export function Navbar({ siteName, nav }: { siteName: string; nav: NavLink[] }) 
 
   return (
     <nav className="relative z-50 flex items-center justify-between px-5 py-5 sm:px-8">
-      <Link href="/" className="inline-flex items-center gap-2.5" aria-label={`${siteName} — الصفحة الرئيسية`}>
+      <Link href={`/${locale}`} className="inline-flex items-center gap-2.5" aria-label={`${siteName} — ${dict.logoHomeLabel}`}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/assets/brand/logo-icon.svg" alt="" className="h-9 w-9 rounded-[10px]" />
         <span style={{ fontFamily: FONT_EN }} className="text-lg font-bold text-white">
@@ -71,7 +84,7 @@ export function Navbar({ siteName, nav }: { siteName: string; nav: NavLink[] }) 
           </Link>
         ))}
         <Link
-          href="/#start-project"
+          href={`/${locale}#start-project`}
           className="ms-2 inline-flex h-[46px] items-center gap-2 px-[22px] font-bold text-white transition-[filter] hover:brightness-110"
           style={{
             background: 'rgba(255,255,255,0.13)',
@@ -79,21 +92,25 @@ export function Navbar({ siteName, nav }: { siteName: string; nav: NavLink[] }) 
             borderRadius: R.pill,
           }}
         >
-          ابدأ مشروعك
+          {dict.ctaStartProject}
         </Link>
+        <LocaleSwitcher locale={locale} className="ms-1" />
       </div>
 
-      <button
-        ref={openBtnRef}
-        type="button"
-        onClick={() => setOpen(true)}
-        className="flex items-center text-white md:hidden"
-        aria-label="فتح القائمة"
-        aria-expanded={open}
-        aria-controls="mobile-menu"
-      >
-        <MenuIcon />
-      </button>
+      <div className="flex items-center gap-3 md:hidden">
+        <LocaleSwitcher locale={locale} />
+        <button
+          ref={openBtnRef}
+          type="button"
+          onClick={() => setOpen(true)}
+          className="flex items-center text-white"
+          aria-label={dict.openMenu}
+          aria-expanded={open}
+          aria-controls="mobile-menu"
+        >
+          <MenuIcon />
+        </button>
+      </div>
 
       {/*
         The outer container always stays mounted with pointer-events toggled by `open`,
@@ -136,7 +153,7 @@ export function Navbar({ siteName, nav }: { siteName: string; nav: NavLink[] }) 
                       {siteName}
                     </span>
                   </span>
-                  <button type="button" onClick={close} className="text-white" aria-label="إغلاق القائمة">
+                  <button type="button" onClick={close} className="text-white" aria-label={dict.closeMenu}>
                     <CloseIcon />
                   </button>
                 </div>
@@ -151,7 +168,7 @@ export function Navbar({ siteName, nav }: { siteName: string; nav: NavLink[] }) 
                   </Link>
                 ))}
                 <Link
-                  href="/#start-project"
+                  href={`/${locale}#start-project`}
                   onClick={close}
                   className="mt-2 inline-flex w-fit items-center gap-2 px-5 py-3 text-base font-bold text-white transition-[filter] hover:brightness-110"
                   style={{
@@ -160,7 +177,7 @@ export function Navbar({ siteName, nav }: { siteName: string; nav: NavLink[] }) 
                     borderRadius: R.pill,
                   }}
                 >
-                  ابدأ مشروعك
+                  {dict.ctaStartProject}
                 </Link>
               </motion.div>
             </React.Fragment>

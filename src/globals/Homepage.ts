@@ -21,11 +21,11 @@ export const Homepage: GlobalConfig = {
               name: 'hero',
               type: 'group',
               fields: [
-                { name: 'kicker', type: 'text', defaultValue: 'وكالة إبداعية واستراتيجية مقرها تركيا' },
-                { name: 'title', type: 'text', defaultValue: 'M Creative' },
-                { name: 'englishTagline', type: 'text', defaultValue: "It's Time To Live Creatively" },
-                { name: 'subtitleLine1', type: 'text', defaultValue: 'نحوّل فهم المشروع والسوق إلى هوية ومحتوى وإنتاج وتسويق،' },
-                { name: 'subtitleLine2', type: 'text', defaultValue: 'ضمن خطة واضحة ومسؤولية محددة عن التنفيذ والقياس.' },
+                { name: 'kicker', type: 'text', localized: true, defaultValue: 'وكالة إبداعية واستراتيجية مقرها تركيا' },
+                { name: 'title', type: 'text', defaultValue: 'M Creative', admin: { description: 'اسم العلامة — نفس القيمة بكل اللغات عادةً' } },
+                { name: 'englishTagline', type: 'text', localized: true, defaultValue: "It's Time To Live Creatively" },
+                { name: 'subtitleLine1', type: 'text', localized: true, defaultValue: 'نحوّل فهم المشروع والسوق إلى هوية ومحتوى وإنتاج وتسويق،' },
+                { name: 'subtitleLine2', type: 'text', localized: true, defaultValue: 'ضمن خطة واضحة ومسؤولية محددة عن التنفيذ والقياس.' },
                 {
                   name: 'visual',
                   type: 'upload',
@@ -46,10 +46,11 @@ export const Homepage: GlobalConfig = {
                 {
                   name: 'quote',
                   type: 'textarea',
+                  localized: true,
                   defaultValue: 'لا ننافس على أقل سعر؛ نبيع فهماً وقراراً وتنفيذاً متقناً، بنطاق وأتعاب واضحين.',
                 },
-                { name: 'highlight', type: 'text', defaultValue: 'نبيع فهماً وقراراً وتنفيذاً متقناً' },
-                { name: 'cite', type: 'text', defaultValue: 'موقف M Creative السعري' },
+                { name: 'highlight', type: 'text', localized: true, defaultValue: 'نبيع فهماً وقراراً وتنفيذاً متقناً' },
+                { name: 'cite', type: 'text', localized: true, defaultValue: 'موقف M Creative السعري' },
               ],
             },
           ],
@@ -60,6 +61,7 @@ export const Homepage: GlobalConfig = {
             {
               name: 'footerAbout',
               type: 'textarea',
+              localized: true,
               defaultValue:
                 'شريك إبداعي واستراتيجي للعلامات العربية الطموحة — نربط الفهم بالتنفيذ، ضمن خطة واضحة ومسؤولية محددة عن النتائج.',
             },

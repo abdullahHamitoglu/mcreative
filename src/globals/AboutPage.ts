@@ -16,10 +16,11 @@ export const AboutPage: GlobalConfig = {
         {
           label: 'المقدمة',
           fields: [
-            { name: 'heroTitle', type: 'text', defaultValue: 'من نحن' },
+            { name: 'heroTitle', type: 'text', localized: true, defaultValue: 'من نحن' },
             {
               name: 'heroSubtitle',
               type: 'text',
+              localized: true,
               defaultValue: 'شريك إبداعي واستراتيجي للعلامات العربية الطموحة',
             },
             { name: 'heroImage', type: 'upload', relationTo: 'media' },
@@ -32,6 +33,7 @@ export const AboutPage: GlobalConfig = {
               name: 'story',
               type: 'textarea',
               required: true,
+              localized: true,
               admin: { description: 'فقرة أو أكثر — استخدم سطراً فارغاً للفصل بين الفقرات' },
             },
           ],
@@ -43,10 +45,11 @@ export const AboutPage: GlobalConfig = {
               name: 'processIntro',
               type: 'group',
               fields: [
-                { name: 'title', type: 'text', defaultValue: 'الاحتراف شيء تراه، لا مجرد وعد' },
+                { name: 'title', type: 'text', localized: true, defaultValue: 'الاحتراف شيء تراه، لا مجرد وعد' },
                 {
                   name: 'description',
                   type: 'text',
+                  localized: true,
                   defaultValue: 'وضوح قبل التنفيذ، وقيادة واحدة أثناء العمل، وصدق بعد التسليم.',
                 },
               ],
@@ -57,9 +60,9 @@ export const AboutPage: GlobalConfig = {
               labels: { singular: 'خطوة', plural: 'خطوات' },
               minRows: 1,
               fields: [
-                { name: 'stepLabel', type: 'text', required: true, admin: { description: 'مثال: قبل التنفيذ' } },
-                { name: 'title', type: 'text', required: true },
-                { name: 'description', type: 'textarea', required: true },
+                { name: 'stepLabel', type: 'text', required: true, localized: true, admin: { description: 'مثال: قبل التنفيذ' } },
+                { name: 'title', type: 'text', required: true, localized: true },
+                { name: 'description', type: 'textarea', required: true, localized: true },
               ],
             },
           ],
@@ -72,9 +75,9 @@ export const AboutPage: GlobalConfig = {
               type: 'array',
               labels: { singular: 'مؤسس', plural: 'مؤسسون' },
               fields: [
-                { name: 'name', type: 'text', required: true },
-                { name: 'role', type: 'text', required: true },
-                { name: 'bio', type: 'textarea', admin: { description: 'نبذة مختصرة (اختياري)' } },
+                { name: 'name', type: 'text', required: true, admin: { description: 'الاسم — نفس القيمة بكل اللغات' } },
+                { name: 'role', type: 'text', required: true, localized: true },
+                { name: 'bio', type: 'textarea', localized: true, admin: { description: 'نبذة مختصرة (اختياري)' } },
                 { name: 'photo', type: 'upload', relationTo: 'media' },
               ],
             },
