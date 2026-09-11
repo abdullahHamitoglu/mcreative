@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import { Reveal } from './Reveal'
 import { R, FONT_EN } from './tokens'
 import type { SiteSettingsData } from './types'
@@ -88,9 +89,9 @@ export function Footer({
           <div className="flex flex-wrap items-center justify-between gap-3 px-8 py-4" style={{ background: '#060606' }}>
             <div className="flex flex-wrap gap-5">
               {siteSettings.nav.map((l) => (
-                <a key={l.id} href={l.href} className="text-[13px] text-[#7d818c] transition-colors hover:text-white">
+                <Link key={l.id} href={l.href} className="text-[13px] text-[#7d818c] transition-colors hover:text-white">
                   {l.label}
-                </a>
+                </Link>
               ))}
             </div>
             <span className="text-xs text-[#7d818c]">

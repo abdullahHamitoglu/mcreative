@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useCallback, useEffect, useRef, useState } from 'react'
+import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FONT_EN, R } from './tokens'
 import { CloseIcon, MenuIcon } from './icons'
@@ -51,26 +52,26 @@ export function Navbar({ siteName, nav }: { siteName: string; nav: NavLink[] }) 
 
   return (
     <nav className="relative z-50 flex items-center justify-between px-5 py-5 sm:px-8">
-      <a href="#top" className="inline-flex items-center gap-2.5" aria-label={`${siteName} — الصفحة الرئيسية`}>
+      <Link href="/" className="inline-flex items-center gap-2.5" aria-label={`${siteName} — الصفحة الرئيسية`}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/assets/brand/logo-icon.svg" alt="" className="h-9 w-9 rounded-[10px]" />
         <span style={{ fontFamily: FONT_EN }} className="text-lg font-bold text-white">
           {siteName}
         </span>
-      </a>
+      </Link>
 
       <div className="hidden md:flex items-center gap-2">
         {nav.map((l) => (
-          <a
+          <Link
             key={l.id}
             href={l.href}
             className="px-4 py-2 text-[15px] text-white/60 transition-colors hover:text-white"
           >
             {l.label}
-          </a>
+          </Link>
         ))}
-        <a
-          href="#start-project"
+        <Link
+          href="/#start-project"
           className="ms-2 inline-flex h-[46px] items-center gap-2 px-[22px] font-bold text-white transition-[filter] hover:brightness-110"
           style={{
             background: 'rgba(255,255,255,0.13)',
@@ -79,7 +80,7 @@ export function Navbar({ siteName, nav }: { siteName: string; nav: NavLink[] }) 
           }}
         >
           ابدأ مشروعك
-        </a>
+        </Link>
       </div>
 
       <button
@@ -140,17 +141,17 @@ export function Navbar({ siteName, nav }: { siteName: string; nav: NavLink[] }) 
                   </button>
                 </div>
                 {nav.map((l) => (
-                  <a
+                  <Link
                     key={l.id}
                     href={l.href}
                     onClick={close}
                     className="rounded-2xl px-4 py-3 text-base font-medium text-[#ccc] transition-colors hover:bg-white/[0.06]"
                   >
                     {l.label}
-                  </a>
+                  </Link>
                 ))}
-                <a
-                  href="#start-project"
+                <Link
+                  href="/#start-project"
                   onClick={close}
                   className="mt-2 inline-flex w-fit items-center gap-2 px-5 py-3 text-base font-bold text-white transition-[filter] hover:brightness-110"
                   style={{
@@ -160,7 +161,7 @@ export function Navbar({ siteName, nav }: { siteName: string; nav: NavLink[] }) 
                   }}
                 >
                   ابدأ مشروعك
-                </a>
+                </Link>
               </motion.div>
             </React.Fragment>
           )}

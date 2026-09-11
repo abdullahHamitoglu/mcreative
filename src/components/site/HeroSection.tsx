@@ -53,8 +53,8 @@ export function HeroSection({ hero, contactEmail }: { hero: HomepageData['hero']
   }
 
   const pills = [
-    { label: 'الخدمات', href: '#services', icon: <BriefcaseIcon /> },
-    { label: 'من نحن', href: '#about', icon: <UserIcon /> },
+    { label: 'الخدمات', href: '/services', icon: <BriefcaseIcon /> },
+    { label: 'من نحن', href: '/about', icon: <UserIcon /> },
     { label: 'تواصل معنا', href: '#start-project', icon: <MessageIcon /> },
   ]
 

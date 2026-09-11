@@ -1,19 +1,22 @@
 import React from 'react'
 import { Reveal } from './Reveal'
+import { SectionHeader } from './SectionHeader'
 import { R } from './tokens'
-import type { HomepageData } from './types'
+import type { AboutPageData } from './types'
 
-export function ProcessSection({ process }: { process: HomepageData['process'] }) {
+export function ProcessSection({
+  intro,
+  process,
+}: {
+  intro: AboutPageData['processIntro']
+  process: AboutPageData['process']
+}) {
+  if (!process.length) return null
+
   return (
     <section id="process" className="relative z-10 px-5 py-10 sm:px-8">
       <div className="mx-auto max-w-[1152px]">
-        <Reveal className="mx-auto mb-10 flex max-w-[640px] flex-col items-center gap-3 text-center">
-          <span className="text-[15px] font-bold text-[#518de5]">منهجنا</span>
-          <h2 className="m-0 text-[clamp(26px,4vw,36px)] font-extrabold text-white">الاحتراف شيء تراه، لا مجرد وعد</h2>
-          <p className="m-0 text-[15px] leading-relaxed text-[#9aa0ab]">
-            وضوح قبل التنفيذ، وقيادة واحدة أثناء العمل، وصدق بعد التسليم.
-          </p>
-        </Reveal>
+        <SectionHeader eyebrow="منهجنا" title={intro.title} description={intro.description} />
 
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
           {process.map((p, i) => (

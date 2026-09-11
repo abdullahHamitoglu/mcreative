@@ -27,16 +27,37 @@ export interface OfferItem {
   scopeNote: string
 }
 
-export interface ProcessItem {
+export interface MarketItem {
   id: string
-  stepLabel: string
+  stage: string
   title: string
   description: string
 }
 
-export interface MarketItem {
+export interface ProjectTeamMember {
+  name: string
+  role: string
+}
+
+export interface ProjectListItem {
   id: string
-  stage: string
+  slug: string
+  title: string
+  client?: string
+  category?: string
+  summary: string
+  coverImageUrl?: string
+}
+
+export interface ProjectDetail extends ProjectListItem {
+  description: string
+  galleryUrls: string[]
+  team: ProjectTeamMember[]
+}
+
+export interface ProcessItem {
+  id: string
+  stepLabel: string
   title: string
   description: string
 }
@@ -45,6 +66,8 @@ export interface FounderItem {
   id: string
   name: string
   role: string
+  bio?: string
+  photoUrl?: string
 }
 
 export interface HomepageData {
@@ -61,16 +84,15 @@ export interface HomepageData {
     highlight: string
     cite: string
   }
-  servicesHeadline: { line1: string; line2: string }
-  services: ServiceItem[]
-  offers: OfferItem[]
-  process: ProcessItem[]
-  marketsHeadline: { title: string; description: string }
-  markets: MarketItem[]
-  about: {
-    title: string
-    description: string
-    founders: FounderItem[]
-  }
   footerAbout: string
+}
+
+export interface AboutPageData {
+  heroTitle: string
+  heroSubtitle: string
+  heroImageUrl?: string
+  story: string
+  processIntro: { title: string; description: string }
+  process: ProcessItem[]
+  founders: FounderItem[]
 }

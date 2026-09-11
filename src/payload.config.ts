@@ -8,8 +8,13 @@ import { fileURLToPath } from 'url'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
+import { Services } from './collections/Services'
+import { Offers } from './collections/Offers'
+import { Markets } from './collections/Markets'
+import { Projects } from './collections/Projects'
 import { SiteSettings } from './globals/SiteSettings'
 import { Homepage } from './globals/Homepage'
+import { AboutPage } from './globals/AboutPage'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -33,8 +38,8 @@ export default buildConfig({
       ],
     },
   },
-  collections: [Users, Media],
-  globals: [SiteSettings, Homepage],
+  collections: [Users, Media, Services, Offers, Markets, Projects],
+  globals: [SiteSettings, Homepage, AboutPage],
   editor: lexicalEditor(),
   secret: env.PAYLOAD_SECRET || '',
   email: nodemailerAdapter({

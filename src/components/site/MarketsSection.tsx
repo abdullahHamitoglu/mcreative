@@ -1,23 +1,28 @@
 import React from 'react'
 import { Reveal } from './Reveal'
+import { SectionHeader, ViewAllLink } from './SectionHeader'
 import { R } from './tokens'
-import type { HomepageData } from './types'
+import type { MarketItem } from './types'
 
 export function MarketsSection({
-  headline,
   markets,
+  viewAllHref,
+  sectionId = 'markets',
 }: {
-  headline: HomepageData['marketsHeadline']
-  markets: HomepageData['markets']
+  markets: MarketItem[]
+  viewAllHref?: string
+  sectionId?: string
 }) {
+  if (!markets.length) return null
+
   return (
-    <section id="markets" className="relative z-10 px-5 py-10 sm:px-8">
+    <section id={sectionId} className="relative z-10 px-5 py-10 sm:px-8">
       <div className="mx-auto max-w-[1152px]">
-        <Reveal className="mx-auto mb-10 flex max-w-[640px] flex-col items-center gap-3 text-center">
-          <span className="text-[15px] font-bold text-[#518de5]">الأسواق</span>
-          <h2 className="m-0 text-[clamp(26px,4vw,36px)] font-extrabold text-white">{headline.title}</h2>
-          <p className="m-0 text-[15px] leading-relaxed text-[#9aa0ab]">{headline.description}</p>
-        </Reveal>
+        <SectionHeader
+          eyebrow="الأسواق"
+          title="نبدأ من تركيا، ونوسّع بثبات"
+          description="ترتيب دخول مدروس، لا ترتيب لحجم الأسواق — كل مرحلة تُبنى على إثبات المرحلة التي قبلها."
+        />
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
           {markets.map((m, i) => (
@@ -38,6 +43,8 @@ export function MarketsSection({
             </Reveal>
           ))}
         </div>
+
+        {viewAllHref && <ViewAllLink href={viewAllHref} label="كل الأسواق" />}
       </div>
     </section>
   )

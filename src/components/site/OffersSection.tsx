@@ -1,20 +1,29 @@
 import React from 'react'
 import { Reveal } from './Reveal'
+import { SectionHeader, ViewAllLink } from './SectionHeader'
 import { CheckCircleIcon } from './icons'
 import { R } from './tokens'
-import type { HomepageData } from './types'
+import type { OfferItem } from './types'
 
-export function OffersSection({ offers }: { offers: HomepageData['offers'] }) {
+export function OffersSection({
+  offers,
+  viewAllHref,
+  sectionId = 'offers',
+}: {
+  offers: OfferItem[]
+  viewAllHref?: string
+  sectionId?: string
+}) {
+  if (!offers.length) return null
+
   return (
-    <section id="offers" className="relative z-10 px-5 py-10 sm:px-8">
+    <section id={sectionId} className="relative z-10 px-5 py-10 sm:px-8">
       <div className="mx-auto max-w-[1152px]">
-        <Reveal className="mx-auto mb-10 flex max-w-[640px] flex-col items-center gap-3 text-center">
-          <span className="text-[15px] font-bold text-[#518de5]">عروضنا</span>
-          <h2 className="m-0 text-[clamp(26px,4vw,36px)] font-extrabold text-white">ثلاثة عروض مفهومة</h2>
-          <p className="m-0 text-[15px] leading-relaxed text-[#9aa0ab]">
-            كل عرض له نطاق ومخرجات محددة سلفاً — لا مفاجآت في التسليم أو التسعير.
-          </p>
-        </Reveal>
+        <SectionHeader
+          eyebrow="عروضنا"
+          title="ثلاثة عروض مفهومة"
+          description="كل عرض له نطاق ومخرجات محددة سلفاً — لا مفاجآت في التسليم أو التسعير."
+        />
 
         <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
           {offers.map((o, i) => (
@@ -36,6 +45,8 @@ export function OffersSection({ offers }: { offers: HomepageData['offers'] }) {
             </Reveal>
           ))}
         </div>
+
+        {viewAllHref && <ViewAllLink href={viewAllHref} label="كل العروض" />}
       </div>
     </section>
   )

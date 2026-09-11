@@ -1,0 +1,76 @@
+'use client'
+
+import React from 'react'
+import { motion } from 'framer-motion'
+import { Reveal } from './Reveal'
+import { SectionHeader, ViewAllLink } from './SectionHeader'
+import { R } from './tokens'
+import type { ProjectListItem } from './types'
+
+export function ProjectsSection({
+  projects,
+  viewAllHref,
+  sectionId = 'projects',
+  showEmptyState = false,
+}: {
+  projects: ProjectListItem[]
+  viewAllHref?: string
+  sectionId?: string
+  /** Homepage teaser hides itself when empty; the dedicated /projects page shows a friendly message instead. */
+  showEmptyState?: boolean
+}) {
+  if (!projects.length && !showEmptyState) return null
+
+  return (
+    <section id={sectionId} className="relative z-10 px-5 py-10 sm:px-8">
+      <div className="mx-auto max-w-[1152px]">
+        <SectionHeader eyebrow="مشاريعنا" title="أعمال نفّذناها" description="نماذج من مشاريع M Creative — مع الفريق الذي نفّذ كل مشروع." />
+
+        {!projects.length && (
+          <div
+            className="mx-auto flex max-w-[520px] flex-col items-center gap-2 p-9 text-center"
+            style={{ borderRadius: R.card, background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.11)' }}
+          >
+            <p className="m-0 text-base font-bold text-white">لا توجد مشاريع منشورة بعد</p>
+            <p className="m-0 text-sm leading-relaxed text-[#9aa0ab]">نعمل على توثيق مشاريعنا الأولى — تابعونا قريباً.</p>
+          </div>
+        )}
+
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {projects.map((p, i) => (
+            <Reveal key={p.id} delay={i * 0.06}>
+              <motion.a
+                href={`/projects/${p.slug}`}
+                whileHover={{ y: -5 }}
+                className="flex h-full flex-col overflow-hidden"
+                style={{ borderRadius: R.card, background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.1)' }}
+              >
+                <div className="relative h-[190px] w-full shrink-0 bg-black/20">
+                  {p.coverImageUrl && (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={p.coverImageUrl} alt="" className="h-full w-full object-cover" />
+                  )}
+                  {p.category && (
+                    <span
+                      className="absolute top-4 inline-flex items-center px-3 py-1 text-xs font-semibold text-white"
+                      style={{ insetInlineStart: 16, borderRadius: R.pill, background: '#518de5' }}
+                    >
+                      {p.category}
+                    </span>
+                  )}
+                </div>
+                <div className="flex flex-1 flex-col gap-2 p-5">
+                  <h3 className="m-0 text-lg font-bold text-white">{p.title}</h3>
+                  <p className="m-0 line-clamp-2 text-sm leading-relaxed text-[#9aa0ab]">{p.summary}</p>
+                  {p.client && <p className="m-0 mt-auto pt-2 text-xs text-[#7d818c]">العميل: {p.client}</p>}
+                </div>
+              </motion.a>
+            </Reveal>
+          ))}
+        </div>
+
+        {viewAllHref && <ViewAllLink href={viewAllHref} label="كل المشاريع" />}
+      </div>
+    </section>
+  )
+}
