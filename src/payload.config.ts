@@ -26,6 +26,12 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    components: {
+      graphics: {
+        Logo: '/components/admin/logo',
+        Icon: '/components/admin/icon',
+      },
+    },
     meta: {
       title: 'M Creative — Admin',
       description: 'M Creative content admin',
