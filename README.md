@@ -21,16 +21,23 @@ Marketing site for M Creative, built on the same stack as moumin-designer — Ne
    pnpm install
    ```
 3. Copy `.env.example` to `.env` if you don't already have one (a `.env` with a generated `PAYLOAD_SECRET` was created for you).
-4. Run the dev server:
+4. Generate Payload's build artifacts — these are gitignored (regenerated from `src/payload.config.ts` and the collections/globals, so they'd drift from source if committed), but the app won't build without them on a fresh clone:
+   ```bash
+   pnpm generate:importmap
+   pnpm generate:types
+   ```
+5. Run the dev server:
    ```bash
    pnpm dev
    ```
-5. Open [http://localhost:3000/admin](http://localhost:3000/admin) and create the first admin user (Payload prompts for this automatically on first visit).
-6. Seed the homepage content:
+6. Open [http://localhost:3000/admin](http://localhost:3000/admin) and create the first admin user (Payload prompts for this automatically on first visit).
+7. Seed the homepage content:
    ```bash
    pnpm seed
    ```
-7. Visit [http://localhost:3000](http://localhost:3000) — the homepage renders from what's now in the database, editable any time from `/admin` → **الصفحة الرئيسية** (Homepage) and **إعدادات الموقع** (Site Settings).
+8. Visit [http://localhost:3000](http://localhost:3000) — the homepage renders from what's now in the database, editable any time from `/admin` → **الصفحة الرئيسية** (Homepage) and **إعدادات الموقع** (Site Settings).
+
+Re-run step 4 any time you add a collection/global field or a custom admin component — Payload doesn't pick those up automatically.
 
 ## Content model
 
