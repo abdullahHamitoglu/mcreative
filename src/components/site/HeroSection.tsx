@@ -79,12 +79,6 @@ export function HeroSection({
   return (
     <section id="top" className="relative z-10 px-5 pt-2 pb-12 sm:px-8">
       <div className="mx-auto flex max-w-[1152px] flex-col items-stretch gap-7 lg:flex-row lg:items-start">
-        {hero.visualUrl && (
-          <Reveal className="h-[320px] w-[260px] max-w-full shrink-0 self-center overflow-hidden rounded-3xl lg:h-[420px] lg:self-start">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={hero.visualUrl} alt="" className="h-full w-full object-cover" />
-          </Reveal>
-        )}
 
         <Reveal className="flex min-w-0 flex-1 flex-col gap-3 py-3 text-center lg:text-start" delay={0.05}>
           <p className="text-base text-white/55">{hero.kicker}</p>

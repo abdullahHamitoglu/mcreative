@@ -110,6 +110,14 @@ export function MenuIcon({ size = 24 }: { size?: number }) {
   )
 }
 
+export function ChevronDownIcon({ size = 10, className = '' }: { size?: number; className?: string }) {
+  return (
+    <svg width={size} height={size * 0.7} viewBox="0 0 12 8" fill="none" aria-hidden="true" className={className}>
+      <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
 export function CloseIcon({ size = 22 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden="true">

@@ -29,9 +29,8 @@ export function ServicesSection({
       <div
         aria-hidden
         className="absolute inset-0 bg-cover bg-center opacity-[0.07]"
-        style={{ backgroundImage: 'url(/assets/brand/services-banner.svg)' }}
       />
-      <div className="relative mx-auto max-w-[1152px]">
+      <div className="relative mx-auto max-w-6xl">
         <SectionHeader eyebrow={dict.eyebrow} title={dict.title} description={dict.description} />
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -41,10 +40,10 @@ export function ServicesSection({
               <Reveal key={s.id} delay={i * 0.05}>
                 <motion.div
                   whileHover={{ y: -4 }}
-                  className="flex h-full flex-col gap-3.5 p-[18px]"
+                  className="flex h-full flex-col gap-3.5 p-4.5"
                   style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: R.card }}
                 >
-                  <span className="flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-2xl" style={{ background: 'rgba(81,141,229,0.12)' }}>
+                  <span className="flex h-13 w-13 shrink-0 items-center justify-center rounded-2xl" style={{ background: 'rgba(81,141,229,0.12)' }}>
                     <Icon color="#518de5" />
                   </span>
                   <div className="flex min-w-0 flex-1 flex-col gap-1.5">

@@ -2,7 +2,7 @@ import type { CollectionConfig } from 'payload'
 
 export const Offers: CollectionConfig = {
   slug: 'offers',
-  labels: { singular: 'عرض', plural: 'العروض' },
+  labels: { singular: 'offer', plural: 'offers' },
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'index', 'order'],

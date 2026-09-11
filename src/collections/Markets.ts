@@ -2,7 +2,7 @@ import type { CollectionConfig } from 'payload'
 
 export const Markets: CollectionConfig = {
   slug: 'markets',
-  labels: { singular: 'سوق', plural: 'الأسواق' },
+  labels: { singular: 'market', plural: 'markets' },
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'stage', 'order'],

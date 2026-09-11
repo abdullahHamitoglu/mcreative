@@ -2,7 +2,7 @@ import type { CollectionConfig } from 'payload'
 
 export const Projects: CollectionConfig = {
   slug: 'projects',
-  labels: { singular: 'مشروع', plural: 'مشاريعنا' },
+  labels: { singular: 'project', plural: 'projects' },
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'client', 'category', 'order'],
