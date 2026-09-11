@@ -2,7 +2,7 @@ import type { GlobalConfig } from 'payload'
 
 export const SiteSettings: GlobalConfig = {
   slug: 'site-settings',
-  label: 'إعدادات الموقع',
+  label: 'Site Settings',
   admin: {
     description: 'اسم الشركة، بيانات التواصل، وروابط التواصل الاجتماعي',
   },

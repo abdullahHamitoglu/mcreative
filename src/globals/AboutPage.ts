@@ -2,7 +2,7 @@ import type { GlobalConfig } from 'payload'
 
 export const AboutPage: GlobalConfig = {
   slug: 'about-page',
-  label: 'صفحة من نحن',
+  label: 'About Page',
   admin: {
     description: 'محتوى صفحة "من نحن" التفصيلية — القصة، منهج العمل، والمؤسسون',
   },

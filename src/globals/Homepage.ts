@@ -2,7 +2,7 @@ import type { GlobalConfig } from 'payload'
 
 export const Homepage: GlobalConfig = {
   slug: 'homepage',
-  label: 'الصفحة الرئيسية',
+  label: 'Home Page',
   admin: {
     description:
       'محتوى المقدمة والموقف السعري فقط — الخدمات والعروض والأسواق ومشاريعنا لها أقسام (Collections) منفصلة، ومن نحن لها صفحة منفصلة',
