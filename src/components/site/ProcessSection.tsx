@@ -1,0 +1,35 @@
+import React from 'react'
+import { Reveal } from './Reveal'
+import { R } from './tokens'
+import type { HomepageData } from './types'
+
+export function ProcessSection({ process }: { process: HomepageData['process'] }) {
+  return (
+    <section id="process" className="relative z-10 px-5 py-10 sm:px-8">
+      <div className="mx-auto max-w-[1152px]">
+        <Reveal className="mx-auto mb-10 flex max-w-[640px] flex-col items-center gap-3 text-center">
+          <span className="text-[15px] font-bold text-[#518de5]">منهجنا</span>
+          <h2 className="m-0 text-[clamp(26px,4vw,36px)] font-extrabold text-white">الاحتراف شيء تراه، لا مجرد وعد</h2>
+          <p className="m-0 text-[15px] leading-relaxed text-[#9aa0ab]">
+            وضوح قبل التنفيذ، وقيادة واحدة أثناء العمل، وصدق بعد التسليم.
+          </p>
+        </Reveal>
+
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          {process.map((p, i) => (
+            <Reveal key={p.id} delay={i * 0.06}>
+              <div
+                className="flex h-full flex-col items-center gap-3 p-6 text-center"
+                style={{ borderRadius: R.card, background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.11)' }}
+              >
+                <span className="text-xs font-bold tracking-[0.1em] text-[#c3d830]">{p.stepLabel}</span>
+                <h3 className="m-0 text-base font-bold text-white">{p.title}</h3>
+                <p className="m-0 text-[13px] leading-[1.75] text-[#b0b0b8]">{p.description}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}

@@ -1,0 +1,12 @@
+node_modules
+.next
+.claude
+.env
+*.tsbuildinfo
+media
+public/media
+.DS_Store
+npm-debug.log*
+pnpm-debug.log*
+src/app/(payload)/admin/importMap.js
+payload-types.ts

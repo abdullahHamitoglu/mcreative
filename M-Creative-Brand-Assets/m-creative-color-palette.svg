@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1246.41 830.94">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        fill: #f3f8ff;
+      }
+
+      .cls-2, .cls-3 {
+        font-family: LoewVariable-Bold, 'Loew Variable';
+        font-size: 30px;
+        font-variation-settings: 'wdth' 100, 'wght' 700, 'ital' 0;
+        font-weight: 700;
+      }
+
+      .cls-4 {
+        fill: #9eae3a;
+      }
+
+      .cls-5 {
+        fill: #0d52bf;
+      }
+
+      .cls-6 {
+        fill: #518de5;
+      }
+
+      .cls-7 {
+        letter-spacing: 0em;
+      }
+
+      .cls-8 {
+        letter-spacing: 0em;
+      }
+
+      .cls-9 {
+        letter-spacing: -.09em;
+      }
+
+      .cls-10 {
+        letter-spacing: -.02em;
+      }
+
+      .cls-11 {
+        letter-spacing: -.02em;
+      }
+
+      .cls-12 {
+        letter-spacing: -.02em;
+      }
+
+      .cls-13 {
+        letter-spacing: -.01em;
+      }
+
+      .cls-14 {
+        letter-spacing: -.04em;
+      }
+
+      .cls-15 {
+        letter-spacing: -.03em;
+      }
+
+      .cls-16 {
+        letter-spacing: -.03em;
+      }
+
+      .cls-17 {
+        letter-spacing: -.03em;
+      }
+
+      .cls-18 {
+        letter-spacing: 0em;
+      }
+
+      .cls-19 {
+        letter-spacing: 0em;
+      }
+
+      .cls-20 {
+        letter-spacing: 0em;
+      }
+
+      .cls-21 {
+        fill: #c3d830;
+      }
+    </style>
+  </defs>
+  <g id="Layer_2-2" data-name="Layer 2">
+    <g>
+      <rect class="cls-1" x="415.47" width="415.47" height="415.47"/>
+      <rect class="cls-21" x="830.94" width="415.47" height="415.47"/>
+      <rect class="cls-4" x="830.94" y="415.47" width="415.47" height="415.47"/>
+      <rect class="cls-5" width="415.47" height="415.47"/>
+      <rect class="cls-6" y="415.47" width="415.47" height="415.47"/>
+      <text class="cls-3" transform="translate(24.61 58.36)"><tspan x="0" y="0">HEX: #0D52BF</tspan><tspan x="0" y="36">RGB: 1</tspan><tspan class="cls-12" x="92.85" y="36">3</tspan><tspan x="110.4" y="36">, 82, 1</tspan><tspan class="cls-13" x="185.94" y="36">9</tspan><tspan x="203.97" y="36">1</tspan><tspan x="0" y="72">CMYK: </tspan><tspan class="cls-17" x="111.12" y="72">9</tspan><tspan class="cls-11" x="128.61" y="72">3</tspan><tspan class="cls-7" x="146.16" y="72">, 5</tspan><tspan class="cls-9" x="177.78" y="72">7</tspan><tspan x="191.85" y="72">, </tspan><tspan class="cls-14" x="205.62" y="72">0</tspan><tspan class="cls-8" x="225.81" y="72">, 25</tspan></text>
+      <text class="cls-3" transform="translate(26.7 473.83)"><tspan x="0" y="0">HEX: #518DE5</tspan><tspan x="0" y="36">RGB: </tspan><tspan class="cls-18" x="81.6" y="36">8</tspan><tspan x="100.62" y="36">1, 141, 229</tspan><tspan x="0" y="72">CMYK: 65, 38, </tspan><tspan class="cls-15" x="212.28" y="72">0</tspan><tspan x="232.47" y="72">, 10</tspan></text>
+      <text class="cls-3" transform="translate(897.45 58.36)"><tspan x="0" y="0">HEX: #C3D</tspan><tspan class="cls-18" x="166.59" y="0">8</tspan><tspan x="185.61" y="0">30</tspan><tspan x="0" y="36">RGB: 1</tspan><tspan class="cls-19" x="92.85" y="36">9</tspan><tspan x="111.09" y="36">5, 216, 48</tspan><tspan x="0" y="72">CMYK: 1</tspan><tspan class="cls-15" x="122.37" y="72">0</tspan><tspan x="142.56" y="72">, </tspan><tspan class="cls-15" x="156.33" y="72">0</tspan><tspan x="176.52" y="72">, </tspan><tspan class="cls-20" x="190.29" y="72">7</tspan><tspan x="206.91" y="72">8, 15</tspan></text>
+      <text class="cls-3" transform="translate(884.15 473.83)"><tspan x="0" y="0">HEX: #9EAE3A</tspan><tspan x="0" y="36">RGB: 158, 1</tspan><tspan class="cls-10" x="154.95" y="36">7</tspan><tspan x="170.91" y="36">4, 58</tspan><tspan x="0" y="72">CMYK: </tspan><tspan class="cls-11" x="111.12" y="72">9</tspan><tspan class="cls-7" x="129.03" y="72">, </tspan><tspan class="cls-15" x="142.8" y="72">0</tspan><tspan x="162.99" y="72">, </tspan><tspan class="cls-20" x="176.76" y="72">6</tspan><tspan class="cls-9" x="195.12" y="72">7</tspan><tspan x="209.19" y="72">, 32</tspan></text>
+      <text class="cls-3" transform="translate(439.41 58.36)"><tspan x="0" y="0">HEX: #F3F8FF</tspan><tspan x="0" y="36">RGB: 24</tspan><tspan class="cls-12" x="118.5" y="36">3</tspan><tspan x="136.05" y="36">, 248, 255</tspan><tspan x="0" y="72">CMYK: 5, </tspan><tspan class="cls-11" x="142.74" y="72">3</tspan><tspan x="160.29" y="72">, </tspan><tspan class="cls-14" x="174.06" y="72">0</tspan><tspan class="cls-8" x="194.25" y="72">, 0</tspan></text>
+      <rect x="415.47" y="415.47" width="415.47" height="415.47"/>
+      <text class="cls-2" transform="translate(439.41 473.83)"><tspan x="0" y="0">HEX: #000000</tspan><tspan x="0" y="36">RGB: </tspan><tspan class="cls-15" x="81.6" y="36">0</tspan><tspan class="cls-7" x="101.79" y="36">, </tspan><tspan class="cls-16" x="115.56" y="36">0</tspan><tspan x="135.75" y="36">, 0</tspan><tspan x="0" y="72">CMYK: </tspan><tspan class="cls-15" x="111.12" y="72">0</tspan><tspan x="131.31" y="72">, </tspan><tspan class="cls-15" x="145.08" y="72">0</tspan><tspan x="165.27" y="72">, </tspan><tspan class="cls-14" x="179.04" y="72">0</tspan><tspan class="cls-8" x="199.23" y="72">, 100</tspan></text>
+    </g>
+  </g>
+</svg>
