@@ -35,15 +35,31 @@ Marketing site for M Creative, built on the same stack as moumin-designer — Ne
    ```bash
    pnpm seed
    ```
-8. Visit [http://localhost:3000](http://localhost:3000) — the homepage renders from what's now in the database, editable any time from `/admin` → **الصفحة الرئيسية** (Homepage) and **إعدادات الموقع** (Site Settings).
+8. Visit [http://localhost:3000](http://localhost:3000) and its subpages — everything renders from what's now in the database, editable any time from `/admin`.
 
 Re-run step 4 any time you add a collection/global field or a custom admin component — Payload doesn't pick those up automatically.
+
+## Site structure
+
+This is a real multi-page site — the navbar links to separate routes, not scroll anchors on one page:
+
+| Route | Source |
+|---|---|
+| `/` | Global: **Homepage** (hero + pricing statement) + short teasers pulling from each collection below |
+| `/services` | Collection: **Services** |
+| `/offers` | Collection: **Offers** |
+| `/markets` | Collection: **Markets** |
+| `/projects`, `/projects/[slug]` | Collection: **Projects** — each project can credit a team (name + role) and carries its own gallery |
+| `/about` | Global: **About Page** — story, "منهجنا" (process), and founders with bio/photo |
 
 ## Content model
 
 - **Global: Site Settings** — site name, contact email/WhatsApp, social links, nav links, footer copyright text.
-- **Global: Homepage** — every section on the page as one tabbed document: Hero, Statement, Services, Offers, Process, Markets, About, Footer.
-- **Collection: Media** — uploads (used for the hero visual; falls back to nothing if left empty — no fake stock imagery).
+- **Global: Homepage** — hero, pricing statement, footer "about" text.
+- **Global: About Page** — hero title/subtitle/image, story, process steps ("منهجنا"), founders.
+- **Collections: Services / Offers / Markets** — each a simple list with an `order` field for manual sorting.
+- **Collection: Projects** — title, slug, client, category, summary/description, cover image, gallery, team credits, `featured` (shows on the homepage teaser). **Seeded empty on purpose** — no fabricated case studies; add real projects (with real client/team credit) from `/admin` → Projects.
+- **Collection: Media** — uploads.
 - **Collection: Users** — admin login only.
 
 ## What was intentionally left out
