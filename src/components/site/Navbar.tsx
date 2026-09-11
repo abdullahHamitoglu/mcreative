@@ -8,7 +8,7 @@ import { CloseIcon, MenuIcon } from './icons'
 import { LocaleSwitcher } from './LocaleSwitcher'
 import type { NavLink } from './types'
 import type { Dictionary } from '@/i18n/dictionary'
-import type { Locale } from '@/i18n/locales'
+import { isRtl, type Locale } from '@/i18n/locales'
 
 export function Navbar({
   siteName,
@@ -24,6 +24,9 @@ export function Navbar({
   const [open, setOpen] = useState(false)
   const panelRef = useRef<HTMLDivElement>(null)
   const openBtnRef = useRef<HTMLButtonElement>(null)
+  // The panel rests at the inline-end edge (end-0: right in LTR, left in RTL), so it must slide
+  // in from beyond that same edge — otherwise it flies in from the opposite side of the screen.
+  const offscreenX = isRtl(locale) ? '-100%' : '100%'
 
   const close = useCallback(() => setOpen(false), [])
 
@@ -140,9 +143,9 @@ export function Navbar({
                 ref={panelRef}
                 className="absolute top-0 bottom-0 end-0 flex w-[78%] max-w-[320px] flex-col gap-2 p-6"
                 style={{ background: '#0c0b0a', borderInlineStart: '1px solid rgba(255,255,255,0.08)' }}
-                initial={{ x: '-100%' }}
+                initial={{ x: offscreenX }}
                 animate={{ x: 0 }}
-                exit={{ x: '-100%' }}
+                exit={{ x: offscreenX }}
                 transition={{ type: 'spring', stiffness: 320, damping: 34 }}
               >
                 <div className="mb-4 flex items-center justify-between">
